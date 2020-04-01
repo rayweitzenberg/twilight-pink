@@ -29,7 +29,7 @@ AFRAME.registerComponent("boxes-setup", {
 			boxer.setAttribute("material", { color: "#EF2D5E" });
             boxer.setAttribute("position", {
                 x: Math.random() * Math.floor(posLimit) - 5,
-                y: Math.random() * Math.floor(posLimit) - 1,
+                y: Math.random() * Math.floor(posLimit) + 3,
                 z: Math.random() * Math.floor(-30)
             });
             boxer.setAttribute("animation", {
@@ -43,7 +43,7 @@ AFRAME.registerComponent("boxes-setup", {
 			let aniMe = sceneEl.querySelector("#rotator-" + i);
 			aniMe.setAttribute('attribute', 'rotation')
 			aniMe.setAttribute('to', '0 360 0')
-			aniMe.setAttribute('dur', '10000')
+			aniMe.setAttribute('dur', Math.random() * 12000 + 4000)
 			aniMe.setAttribute('easing', 'linear')
 			aniMe.setAttribute('repeat', 'indefinite')
 
