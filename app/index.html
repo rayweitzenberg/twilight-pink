@@ -17,57 +17,23 @@
 		<!-- endbuild -->
 	</head>
 	<body>
-		<script>
-			AFRAME.registerComponent("boxes-logic", {
-				schema: {},
+		<script src="scripts/main.js"></script>
 
-				init: function() {
-					// console.log(this.el);
-
-					const sceneEl = document.querySelector("a-scene");
-					const protoBox = sceneEl.querySelector("#oneBox");
-					console.log("sceneEl: " + sceneEl);
-
-					const boxRotat = protoBox.components.animation__rotation;
-					console.log("boxRotat: " + boxRotat);
-
-					// const posLimit = 17;
-					const scaleLimit = 3;
-
-					for (let i = 0; i < 20; i++) {
-						let posLimit = Math.random() * 27
-						let randDur = Math.random() * 3600 + 2000
-						let newBox = document.createElement("a-box");
-						newBox.setAttribute("material", { color: "#EF2D5E" });
-						newBox.setAttribute("position", {
-							x: Math.random() * Math.floor(posLimit) - 5,
-							y: Math.random() * Math.floor(posLimit) - 1,
-							z: Math.random() * Math.floor(-30)
-						});
-						newBox.setAttribute("scale", { x: 2, y: 2, z: 2 });
-						newBox.setAttribute("animation", {
-							property: "rotation",
-							to: { x: 0, y: 360, z: 360 },
-							easing: 'easeInBounce',
-							dur: randDur,
-							// dur: 3600,
-							loop: true
-						});
-						sceneEl.appendChild(newBox);
-					}
-				}
-			});
-		</script>
-		<a-scene boxes-logic>
+		<a-scene boxes-setup>
 			<a-entity
 				id="rain"
 				particle-system="preset: dust; color: #24CAFF,#000000; particleCount: 5000; maxAge: 1; velocityValue: 0 0 0; rotationAngle: 180; accelerationSpread: 50 50 50;"
 			></a-entity>
 
-			<a-entity
-				id="oneBox"
-				light="type: point; intensity: 2"
-			></a-entity>
+			<a-entity id="oneBox" light="type: point; intensity: 2"></a-entity>
+
+			<a-animation
+				id="rotator"
+				attribute="rotation"
+				dur="10000"
+				easing="linear"
+				repeat="indefinite"
+			></a-animation>
 
 			<a-entity
 				id="ocean"
@@ -94,13 +60,7 @@
 		></script>
 		<!-- endbuild -->
 		<!-- build:js scripts/main.js -->
-		<script src="scripts/main.js"></script>
+		<!-- <script src="scripts/main.js"></script> -->
 		<!-- endbuild -->
 	</body>
 </html>
-
-<!-- Notes via RWW -->
-<!-- 
-	https://github.com/IdeaSpaceVR/aframe-particle-system-component
-
- -->
