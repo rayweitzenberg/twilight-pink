@@ -9,23 +9,37 @@
 		<script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
 		<script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
 		<script src="https://unpkg.com/aframe-extras.tube@%5E3.5.x/dist/aframe-extras.tube.min.js"></script>
-		<title>Starfield</title>
-		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
-		<!-- Place favicon.ico in the root directory -->
+		<title>Twilight Pink</title>
 		<!-- build:css styles/main.css -->
-		<link rel="stylesheet" href="styles/main.css" />
+		<!-- <link rel="stylesheet" href="styles/main.css" /> -->
 		<!-- endbuild -->
 	</head>
 	<body>
 		<script src="scripts/main.js"></script>
 
-		<a-scene boxes-setup>
+		<a-scene twilight-pink>
+			<a-entity
+				id="ocean"
+				ocean="density: 20; width: 50; depth: 50; speed: 4"
+				material="color: #9CE3F9; opacity: 0.75; metalness: 1; roughness: 1;"
+				rotation="-90 0 0"
+				light="type: ambient; intensity: 0.2; color: #f00"
+			></a-entity>
+
+			<a-entity
+				id="sky"
+				geometry="primitive: sphere; radius: 5000"
+				material="shader: gradient; topColor: 235 235 245; bottomColor: 100 100 210"
+				scale="-1 1 1"
+			></a-entity>
+
+			<a-entity id="light" light="type: ambient; color: #888"></a-entity>
+			<a-entity id="pointLight" light="type: point; intensity: 2"></a-entity>
+
 			<a-entity
 				id="rain"
 				particle-system="preset: dust; color: #24CAFF,#000000; particleCount: 5000; maxAge: 1; velocityValue: 0 0 0; rotationAngle: 180; accelerationSpread: 50 50 50;"
 			></a-entity>
-
-			<a-entity id="oneBox" light="type: point; intensity: 2"></a-entity>
 
 			<a-animation id="rotator-0"></a-animation>
 			<a-animation id="rotator-1"></a-animation>
@@ -49,32 +63,6 @@
 			<a-animation id="rotator-19"></a-animation>
 			<!-- <a-animation id="rotator-20"></a-animation> -->
 
-			<a-entity
-				id="ocean"
-				ocean="density: 20; width: 50; depth: 50; speed: 4"
-				material="color: #9CE3F9; opacity: 0.75; metalness: 1; roughness: 1;"
-				rotation="-90 0 0"
-				light="type: ambient; intensity: 0.2; color: #f00"
-			></a-entity>
-
-			<a-entity
-				id="sky"
-				geometry="primitive: sphere; radius: 5000"
-				material="shader: gradient; topColor: 235 235 245; bottomColor: 100 100 210"
-				scale="-1 1 1"
-			></a-entity>
-
-			<a-entity id="light" light="type: ambient; color: #888"></a-entity>
 		</a-scene>
-
-		<!-- build:js scripts/vendor.js -->
-		<script
-			type="text/javascript"
-			src="/node_modules/jquery/dist/jquery.min.js"
-		></script>
-		<!-- endbuild -->
-		<!-- build:js scripts/main.js -->
-		<!-- <script src="scripts/main.js"></script> -->
-		<!-- endbuild -->
 	</body>
 </html>
