@@ -42,9 +42,9 @@ Please don't take this seriously. I don't. There's already enough serious shit o
 
 ## Working Notes
 
-##### Friday, April 3, 2020 at 11:09:38 PM
-
 ### Customizing look-controls
+
+##### Friday, April 3, 2020 at 11:09:38 PM
 
 https://aframe.io/docs/1.0.0/components/look-controls.html#customizing-look-controls
 
