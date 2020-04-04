@@ -2,7 +2,10 @@
 <html lang="">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="description" content="They're Pink! Look at em fidget about their orbits" />
+		<meta
+			name="description"
+			content="They're Pink! Look at em fidget about their orbits"
+		/>
 		<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
 		<script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
@@ -16,8 +19,13 @@
 	</head>
 	<body>
 		<script src="scripts/main.js"></script>
+		<script src="scripts/look-controls-rww.js"></script>
 
 		<a-scene twilight-pink>
+			<a-entity id="rig" position="0 1.6 0">
+				<a-entity id="camera" camera look-controls></a-entity>
+			</a-entity>
+
 			<a-entity
 				id="ocean"
 				ocean="density: 20; width: 50; depth: 50; speed: 4"
@@ -34,7 +42,11 @@
 			></a-entity>
 
 			<a-entity id="light" light="type: ambient; color: #888"></a-entity>
-			<a-entity id="pointLight" light="type: point; intensity: 2"></a-entity>
+
+			<a-entity
+				id="pointLight"
+				light="type: point; intensity: 2"
+			></a-entity>
 
 			<a-entity
 				id="rain"
@@ -62,7 +74,6 @@
 			<a-animation id="rotator-18"></a-animation>
 			<a-animation id="rotator-19"></a-animation>
 			<!-- <a-animation id="rotator-20"></a-animation> -->
-
 		</a-scene>
 	</body>
 </html>
