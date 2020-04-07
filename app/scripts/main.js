@@ -14,8 +14,6 @@ AFRAME.registerComponent("twilight-pink", {
 		const sceneEl = document.querySelector("a-scene");
 
 		for (let i = 0; i < 20; i++) {
-			let posLimit = Math.random() * 27;
-			let randDur = Math.random() * 3600 + 2000;
 
 			// ————————————————————————————————————o Containers for each element -->
 			// Containers for each element -->
@@ -33,20 +31,28 @@ AFRAME.registerComponent("twilight-pink", {
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
+			let posLimit = Math.random() * 27;
+			let randDur = Math.random() * 3600 + 2000;
+			let theX = Math.floor(Math.random() * Math.floor(posLimit) - 5)
+			let theY = Math.floor(Math.random() * Math.floor(posLimit) + 3)
+			let theZ = Math.floor(Math.random() * Math.floor(-30))
+			// console.log('theZ: ' + theZ)
+			
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
 			boxer.setAttribute("scale", this.data.boxScale);
 			boxer.setAttribute("material", { color: "#EF2D5E" });
 			boxer.setAttribute("position", {
-				x: Math.random() * Math.floor(posLimit) - 5,
-				y: Math.random() * Math.floor(posLimit) + 3,
-				z: Math.random() * Math.floor(-30)
+				x: theX,
+				y: theY,
+				z: theZ
 			});
 			boxer.setAttribute("animation", {
 				property: "rotation",
-				to: { x: 0, y: 360, z: 360 },
-				easing: "easeInBounce",
+				to: { x: 360 - theX, y: 360 - theY, z: 360 - theZ },
+				easing: "linear",
 				dur: randDur,
+				"repeat": "indefinite",
 				loop: true
 			});
 
