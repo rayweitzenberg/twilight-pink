@@ -4,9 +4,7 @@ AFRAME.registerComponent("twilight-pink", {
 	// Settings Settings -->
 	//
 	schema: {
-		// boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
-		// thePos: { type: "vec3", default: { x: 1, y: 1, z: -5 } },
-		// newPos: { type: "vec3", default: { x: 0, y: 0, z: -8 } }
+		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } }
 	},
 
 	init: function() {
@@ -39,7 +37,7 @@ AFRAME.registerComponent("twilight-pink", {
 			
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
-			boxer.setAttribute("scale", { x: 2, y: 2, z: 2 });
+			boxer.setAttribute("scale", this.data.boxScale);
 			boxer.setAttribute("material", { color: "#EF2D5E" });
 			boxer.setAttribute("position", { x: theX, y: theY, z: theZ })
 			boxer.setAttribute("animation", {
