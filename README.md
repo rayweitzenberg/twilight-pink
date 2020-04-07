@@ -42,6 +42,23 @@ Please don't take this seriously. I don't. There's already enough serious shit o
 
 ## Working Notes
 
+### A-Frame Upgrade + Broke out Asteroid Belt from Stormed at Sea
+
+#### Tuesday, April 7, 2020 at 7:44:13 AM
+
+WebXR wouldn't work in the Quest with existing version of the app. So set out to upgrade aframe. This broke nearly everything. Decided this was a good opportunity to work on the starfield idea I've been wanting to do.
+
+So stripped out the ocean, sky and particle system. Replaced all that with randomply placed cubes hovering just outside the camera's position. This worked. Ended up keeping the swarming cubes, but now they oribit the randomly placed cubes.
+
+This I like.
+
+What would really set this off would be audio reactivity. Wondering about this one.
+
+I've got Wednesday off from work, at which point I'll be working on my own shit. Wanna put a fair amount of time into C4D, but this project might make an appearance.
+
+Oh yeah! ... this works beautifully in the Quest. Wanna show Andrey.
+
+
 ### Customizing look-controls
 
 ##### Friday, April 3, 2020 at 11:09:38 PM
