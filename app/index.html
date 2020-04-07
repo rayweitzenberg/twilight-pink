@@ -6,12 +6,14 @@
 			name="description"
 			content="They're Pink! Look at em fidget about their orbits"
 		/>
-		<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-		<script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
-		<script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-		<script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
-		<script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
-		<script src="https://unpkg.com/aframe-extras.tube@%5E3.5.x/dist/aframe-extras.tube.min.js"></script>
+		<!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+		<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+		<!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script> -->
+		<!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script> -->
+		<!-- <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script> -->
+		<!-- <script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script> -->
+		<!-- <script src="https://unpkg.com/aframe-extras.tube@%5E3.5.x/dist/aframe-extras.tube.min.js"></script> -->
 		<title>Twilight Pink</title>
 		<!-- build:css styles/main.css -->
 		<!-- <link rel="stylesheet" href="styles/main.css" /> -->
@@ -19,7 +21,7 @@
 	</head>
 	<body>
 		<script src="scripts/main.js"></script>
-		<script src="scripts/look-controls-rww.js"></script>
+		<!-- <script src="scripts/look-controls-rww.js"></script> -->
 
 		<a-scene twilight-pink>
 			<a-entity id="rig" position="0 1.6 0">
@@ -37,7 +39,6 @@
 			<a-entity
 				id="sky"
 				geometry="primitive: sphere; radius: 5000"
-				material="shader: gradient; topColor: 235 235 245; bottomColor: 100 100 210"
 				scale="-1 1 1"
 			></a-entity>
 
@@ -52,7 +53,7 @@
 				id="rain"
 				particle-system="preset: dust; color: #24CAFF,#000000; particleCount: 5000; maxAge: 1; velocityValue: 0 0 0; rotationAngle: 180; accelerationSpread: 50 50 50;"
 			></a-entity>
-
+			<!-- 
 			<a-animation id="rotator-0"></a-animation>
 			<a-animation id="rotator-1"></a-animation>
 			<a-animation id="rotator-2"></a-animation>
@@ -72,8 +73,16 @@
 			<a-animation id="rotator-16"></a-animation>
 			<a-animation id="rotator-17"></a-animation>
 			<a-animation id="rotator-18"></a-animation>
-			<a-animation id="rotator-19"></a-animation>
+			<a-animation id="rotator-19"></a-animation> -->
 			<!-- <a-animation id="rotator-20"></a-animation> -->
+
+			<!-- <a-entity
+				id="aniAnchor"
+				rotation="0 0 0"
+				animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+			>
+				<a-sphere position="5 0 0" color="mediumseagreen"></a-sphere>
+			</a-entity> -->
 		</a-scene>
 	</body>
 </html>

@@ -4,35 +4,42 @@ AFRAME.registerComponent("twilight-pink", {
 	// Settings Settings -->
 	//
 	schema: {
-		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
-		thePos: { type: "vec3", default: { x: 1, y: 1, z: -5 } },
-		newPos: { type: "vec3", default: { x: 0, y: 0, z: -8 } }
+		// boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
+		// thePos: { type: "vec3", default: { x: 1, y: 1, z: -5 } },
+		// newPos: { type: "vec3", default: { x: 0, y: 0, z: -8 } }
 	},
 
 	init: function() {
 
 		const sceneEl = document.querySelector("a-scene");
+		const aniAnchor = document.querySelector("#aniAnchor");
 
 		for (let i = 0; i < 20; i++) {
 
 			// ————————————————————————————————————o Containers for each element -->
 			// Containers for each element -->
 			//
-			let wrapper = document.createElement("a-entity");
-			wrapper.setAttribute("id", "wrapper-" + i);
+			// let wrapper = document.createElement("a-entity");
+			// wrapper.setAttribute("id", "wrapper-" + i);
 
-			// ————————————————————————————————————o Need inner to enable orbting -->
-			// Need inner to enable orbting animation -->
+			// ————————————————————————————————————o Need boxHldr to enable orbting -->
+			// Need boxHldr to enable orbting animation -->
 			//
-			let inner = document.createElement("a-entity");
-			inner.setAttribute("id", "inner-" + i);
-			inner.setAttribute("position", "0 0 -5");
+			let boxHldr = document.createElement("a-entity");
+			boxHldr.setAttribute("id", "boxHldr-" + i);
+			boxHldr.setAttribute("animation", {
+				property: "rotation",
+				to: "0 360 0",
+				easing: "linear",
+				dur: 4000,
+				loop: true
+			});
 
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
 			let posLimit = Math.random() * 27;
-			let randDur = Math.random() * 3600 + 2000;
+			// let randDur = Math.random() * 3600 + 2000;
 			let theX = Math.floor(Math.random() * Math.floor(posLimit) - 5)
 			let theY = Math.floor(Math.random() * Math.floor(posLimit) + 3)
 			let theZ = Math.floor(Math.random() * Math.floor(-30))
@@ -40,36 +47,21 @@ AFRAME.registerComponent("twilight-pink", {
 			
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
-			boxer.setAttribute("scale", this.data.boxScale);
+			// boxer.setAttribute("position", "0 0 -10");
+			boxer.setAttribute("scale", { x: 2, y: 2, z: 2 });
 			boxer.setAttribute("material", { color: "#EF2D5E" });
-			boxer.setAttribute("position", {
-				x: theX,
-				y: theY,
-				z: theZ
-			});
-			boxer.setAttribute("animation", {
-				property: "rotation",
-				to: { x: 360 - theX, y: 360 - theY, z: 360 - theZ },
-				easing: "linear",
-				dur: randDur,
-				"repeat": "indefinite",
-				loop: true
-			});
+			boxer.setAttribute("position", { x: theX, y: theY, z: theZ })
 
-			// ————————————————————————————————————o Orbiting Functionality -->
-			// Orbiting Functionality -->
-			//
-			let aniMe = sceneEl.querySelector("#rotator-" + i);
-			aniMe.setAttribute("attribute", "rotation");
-			aniMe.setAttribute("to", "0 360 0");
-			aniMe.setAttribute("dur", Math.random() * 12000 + 4000); // Orbit Speed
-			aniMe.setAttribute("easing", "linear");
-			aniMe.setAttribute("repeat", "indefinite");
+			// let sphereAnchor = document.createElement('a-sphere')
+			// sphereAnchor.setAttribute("id", "sphereAnchor-" + i);
+			// sphereAnchor.setAttribute("position", "0 0 -5");
+			// sphereAnchor.setAttribute("color", "mediumseagreen");
 
-			sceneEl.appendChild(wrapper);
-			wrapper.appendChild(inner); // Needs to be in the same container as aniMe, the orbit animation element
-			inner.appendChild(boxer);
-			wrapper.appendChild(aniMe); // Orbiting animation needs to be in the same container as inner
+			// sceneEl.appendChild(wrapper);
+			sceneEl.appendChild(boxHldr); // Needs to be in the same container as aniMe, the orbit animation element
+			boxHldr.appendChild(boxer);
+			// boxer.appendChild(sphereAnchor);
+			// wrapper.appendChild(aniMe); // Orbiting animation needs to be in the same container as boxHldr
 		}
 	},
 
