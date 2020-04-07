@@ -142,26 +142,28 @@ AFRAME.registerComponent("twilight-pink", {
 
 		this.oneScaler++
 
-		
 
-		// scaler = function() {
-		// 	console.log(toViz(diameter, 37, 160, 1, 6)); // 0
-		// }
+		for(let i = 0; i <= this.scalerEls.length; i++) {
+			var scaleTmp = this.scaleTmp = this.scaleTmp || {x: 2, y: 2, z: 2};
+			var rotation = this.scalerEls[this.oneScaler].getAttribute('scale');
+			scaleTmp.x = toViz(diameter, 37, 160, 1, 6);
+			scaleTmp.y = toViz(diameter, 37, 160, 1, 6);
+			scaleTmp.z = toViz(diameter, 37, 160, 1, 6);
+			this.scalerEls[this.oneScaler].setAttribute('scale', scaleTmp);
+		}
+		// console.log('this.scalerEls.length;: ' + this.scalerEls.length)
 
-		// scaler = toViz(diameter, 37, 160, 1, 6)
-		// console.log('scaler: ' + scaler)
-
-		// console.log(scale(num, -20, 0, -100, 100)); // 150
 
 		// console.log('aniScale: ' + aniScale.x)
 
 		// var aniEl = this.el;
-		var scaleTmp = this.scaleTmp = this.scaleTmp || {x: 2, y: 2, z: 2};
-		var rotation = this.scalerEls[this.oneScaler].getAttribute('scale');
-		scaleTmp.x = toViz(diameter, 37, 160, 1, 6);
-		scaleTmp.y = toViz(diameter, 37, 160, 1, 6);
-		scaleTmp.z = toViz(diameter, 37, 160, 1, 6);
-		this.scalerEls[this.oneScaler].setAttribute('scale', scaleTmp);
+
+		// var scaleTmp = this.scaleTmp = this.scaleTmp || {x: 2, y: 2, z: 2};
+		// var rotation = this.scalerEls[this.oneScaler].getAttribute('scale');
+		// scaleTmp.x = toViz(diameter, 37, 160, 1, 6);
+		// scaleTmp.y = toViz(diameter, 37, 160, 1, 6);
+		// scaleTmp.z = toViz(diameter, 37, 160, 1, 6);
+		// this.scalerEls[this.oneScaler].setAttribute('scale', scaleTmp);
 
 		// console.log('diameter: ' + diameter)
 	}
