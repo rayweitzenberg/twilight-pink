@@ -12,56 +12,46 @@ AFRAME.registerComponent("twilight-pink", {
 	init: function() {
 
 		const sceneEl = document.querySelector("a-scene");
-		const aniAnchor = document.querySelector("#aniAnchor");
 
 		for (let i = 0; i < 20; i++) {
-
-			// ————————————————————————————————————o Containers for each element -->
-			// Containers for each element -->
-			//
-			// let wrapper = document.createElement("a-entity");
-			// wrapper.setAttribute("id", "wrapper-" + i);
 
 			// ————————————————————————————————————o Need boxHldr to enable orbting -->
 			// Need boxHldr to enable orbting animation -->
 			//
+			let randDur = Math.random() * 8600 + 6500;
+
 			let boxHldr = document.createElement("a-entity");
 			boxHldr.setAttribute("id", "boxHldr-" + i);
 			boxHldr.setAttribute("animation", {
 				property: "rotation",
-				to: "0 360 0",
+				to: "0 360 0",	// Orbit around Y axis
 				easing: "linear",
-				dur: 4000,
+				dur: randDur,	// Random duration of orbit
 				loop: true
 			});
 
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
-			//
-			let posLimit = Math.random() * 27;
-			// let randDur = Math.random() * 3600 + 2000;
-			let theX = Math.floor(Math.random() * Math.floor(posLimit) - 5)
-			let theY = Math.floor(Math.random() * Math.floor(posLimit) + 3)
-			let theZ = Math.floor(Math.random() * Math.floor(-30))
-			// console.log('theZ: ' + theZ)
+			//			
+			let theX = Math.floor(Math.random() * Math.floor(27) - 5)
+			let theY = Math.floor(Math.random() * Math.floor(-30) + 20)
+			let theZ = Math.floor(Math.random() * Math.floor(-30) - 20)
 			
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
-			// boxer.setAttribute("position", "0 0 -10");
 			boxer.setAttribute("scale", { x: 2, y: 2, z: 2 });
 			boxer.setAttribute("material", { color: "#EF2D5E" });
 			boxer.setAttribute("position", { x: theX, y: theY, z: theZ })
+			boxer.setAttribute("animation", {
+				property: "rotation",
+				to: "360 360 360",
+				easing: "linear",
+				dur: randDur,
+				loop: true
+			});
 
-			// let sphereAnchor = document.createElement('a-sphere')
-			// sphereAnchor.setAttribute("id", "sphereAnchor-" + i);
-			// sphereAnchor.setAttribute("position", "0 0 -5");
-			// sphereAnchor.setAttribute("color", "mediumseagreen");
-
-			// sceneEl.appendChild(wrapper);
-			sceneEl.appendChild(boxHldr); // Needs to be in the same container as aniMe, the orbit animation element
+			sceneEl.appendChild(boxHldr);
 			boxHldr.appendChild(boxer);
-			// boxer.appendChild(sphereAnchor);
-			// wrapper.appendChild(aniMe); // Orbiting animation needs to be in the same container as boxHldr
 		}
 	},
 
