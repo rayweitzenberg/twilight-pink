@@ -2,29 +2,39 @@
 // https://open.spotify.com/playlist/0OjvCj2e3dazJvpIKwTkAh?si=K1iQkdFYTnaikR19UJ1BrQ
 // Sam's "The Vaccine" playlist
 // Wild times we're living in
-// 
+//
 AFRAME.registerComponent("twilight-pink", {
-
 	// ————————————————————————————————————o Settings Settings -->
 	// Settings Settings -->
 	//
 	schema: {
-		randDur: { type: "int", default: Math.floor(Math.random() * 8600 + 6500) },
+		randDur: {
+			type: "int",
+			default: Math.floor(Math.random() * 8600 + 6500)
+		},
 		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
-		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } }
+		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
+		sadeScale: { type: "vec3",
+			default: { x: 9, y: 8, z: 8 }
+		},
+		orbitColor: { type: "color", default: "#37428A" },
+		anchColor: { type: "color", default: "#EF2D5E" }
 	},
 
 	init: function() {
+		let data = this.data;
 
 		const sceneEl = document.querySelector("a-scene");
+		this.oneScaler = 0
+		this.scalerEls = []
+
 		let randDur = Math.random() * 8600 + 6500;
 
 		// ————————————————————————————————————o————————————————————————————————————o Cubing -->
 		// Cubing -->
 		// ————————————————————————————————————o————————————————————————————————————o Cubing —>
-		// 
+		//
 		for (let i = 0; i < 60; i++) {
-
 			let randDur = Math.random() * 8600 + 6500;
 
 			// ————————————————————————————————————o Need boxHldr to enable orbting -->
@@ -34,24 +44,24 @@ AFRAME.registerComponent("twilight-pink", {
 			boxHldr.setAttribute("id", "boxHldr-" + i);
 			boxHldr.setAttribute("animation", {
 				property: "rotation",
-				to: "0 360 0",	// Orbit around Y axis
+				to: "0 360 0", // Orbit around Y axis
 				easing: "linear",
-				dur: randDur,	// Random duration of orbit
+				dur: randDur, // Random duration of orbit
 				loop: true
 			});
 
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
-			//			
-			let boxX = Math.floor(Math.random() * Math.floor(27) - 5)
-			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20)
-			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 20)
-			
+			//
+			let boxX = Math.floor(Math.random() * Math.floor(27) - 5);
+			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20);
+			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 20);
+
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
-			boxer.setAttribute("scale", this.data.boxScale);
-			boxer.setAttribute("material", { color: "#37428A" });
-			boxer.setAttribute("position", { x: boxX, y: boxY, z: boxZ })
+			boxer.setAttribute("scale", data.boxScale);
+			boxer.setAttribute("material", { color: data.orbitColor });
+			boxer.setAttribute("position", { x: boxX, y: boxY, z: boxZ });
 			boxer.setAttribute("animation", {
 				property: "rotation",
 				to: "360 360 360",
@@ -61,31 +71,36 @@ AFRAME.registerComponent("twilight-pink", {
 			});
 
 			sceneEl.appendChild(boxHldr);
-			boxHldr.appendChild(boxer);	// Put boxer in a parent container to achieve orbital rotation
-			
+			boxHldr.appendChild(boxer); // Put boxer in a parent container to achieve orbital rotation
+
 			// I can't kick this feelin when it hits
 		}
 
 		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids -->
 		// Anchored Asteroids -->
 		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids —>
-		// 
+		//
 		for (let j = 0; j < 500; j++) {
-
 			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
-			
-			let starX = Math.floor(Math.random() * (30 + 60) - 40)
-			let starY = Math.floor(Math.random() * (30 + 60) - 40)
-			let starZ = Math.floor(Math.random() * (30 + 60) - 40)
-			let starScaleAll = 2
-			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30)
-			
-			let oneStar = document.createElement("a-box");
-			oneStar.setAttribute("id", "oneStar-" + j);
-			oneStar.setAttribute("scale", this.data.starScale);
-			oneStar.setAttribute("material", { color: "#EF2D5E" });
-			oneStar.setAttribute("position", { x: starX, y: starY, z: starZ })
-			oneStar.setAttribute("animation", {
+
+			let starX = Math.floor(Math.random() * (30 + 60) - 40);
+			let starY = Math.floor(Math.random() * (30 + 60) - 40);
+			let starZ = Math.floor(Math.random() * (30 + 60) - 40);
+			let starScaleAll = 2;
+			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30);
+
+			// let oneStar;
+			this.oneStar = document.createElement("a-box");
+			this.oneStar.setAttribute("id", "oneStar-" + j);
+			this.oneStar.setAttribute("scale", this.data.starScale);
+			// this.oneStar.setAttribute("scale", {x: 8, y: 8, z: 8});
+			this.oneStar.setAttribute("material", { color: data.anchColor });
+			this.oneStar.setAttribute("position", {
+				x: starX,
+				y: starY,
+				z: starZ
+			});
+			this.oneStar.setAttribute("animation", {
 				property: "rotation",
 				from: "180 180 180",
 				to: "360 360 360",
@@ -93,8 +108,71 @@ AFRAME.registerComponent("twilight-pink", {
 				dur: randDur,
 				loop: true
 			});
+			// oneStar.setAttribute("animation__scale", {
+			// 	property: "scale",
+			// 	from: this.data.starScale,
+			// 	to: {x: diameter, y: diameter, z: diameter},
+			// 	easing: "linear",
+			// 	dur: 400,
+			// 	loop: true
+			// });
 
-			sceneEl.appendChild(oneStar);
+			this.scalerEls.push(this.oneStar)
+
+			sceneEl.appendChild(this.oneStar);
+			
 		}
+		// console.log('scalerEls: ' + this.scalerEls)
+	},
+
+	tick: function(time, timeDelta) {
+
+		let oneScaler = 0
+		if (this.oneScaler >= 499) {
+			this.oneScaler = 0
+		}
+
+		// this.scalerEls[this.oneScaler].setAttribute("scale", {
+		// 	x: 3,
+		// 	y: 3,
+		// 	z: 3
+		// });
+
+		// console.log('this.scalerEls[this.oneScaler] ' + this.scalerEls[this.oneScaler])
+
+		this.oneScaler++
+
+		
+
+		// scaler = function() {
+		// 	console.log(toViz(diameter, 37, 160, 1, 6)); // 0
+		// }
+
+		// scaler = toViz(diameter, 37, 160, 1, 6)
+		// console.log('scaler: ' + scaler)
+
+		// console.log(scale(num, -20, 0, -100, 100)); // 150
+
+		// console.log('aniScale: ' + aniScale.x)
+
+		// var aniEl = this.el;
+		var scaleTmp = this.scaleTmp = this.scaleTmp || {x: 2, y: 2, z: 2};
+		var rotation = this.scalerEls[this.oneScaler].getAttribute('scale');
+		scaleTmp.x = toViz(diameter, 37, 160, 1, 6);
+		scaleTmp.y = toViz(diameter, 37, 160, 1, 6);
+		scaleTmp.z = toViz(diameter, 37, 160, 1, 6);
+		this.scalerEls[this.oneScaler].setAttribute('scale', scaleTmp);
+
+		// console.log('diameter: ' + diameter)
 	}
 });
+
+$(function() {});
+
+let soundFrame = () => {
+	console.log("soundFile: " + soundFile);
+	soundFile.pause();
+	setTimeout(function() {
+		soundFile.play();
+	}, 1000);
+};

@@ -131,7 +131,8 @@ function startAppServer() {
       routes: {
         '/node_modules': 'node_modules'
       }
-    }
+    },
+    https: true
   });
 
   watch([
