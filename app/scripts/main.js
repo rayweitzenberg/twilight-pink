@@ -1,3 +1,8 @@
+// Soundtrack to the construction of this app:
+// https://open.spotify.com/playlist/0OjvCj2e3dazJvpIKwTkAh?si=K1iQkdFYTnaikR19UJ1BrQ
+// Sam's "The Vaccine" playlist
+// Wild times we're living in
+// 
 AFRAME.registerComponent("twilight-pink", {
 
 	// ————————————————————————————————————o Settings Settings -->
@@ -57,20 +62,21 @@ AFRAME.registerComponent("twilight-pink", {
 
 			sceneEl.appendChild(boxHldr);
 			boxHldr.appendChild(boxer);	// Put boxer in a parent container to achieve orbital rotation
+			
 			// I can't kick this feelin when it hits
 		}
 
-		// ————————————————————————————————————o————————————————————————————————————o Starfield -->
-		// Starfield -->
-		// ————————————————————————————————————o————————————————————————————————————o Starfield —>
+		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids -->
+		// Anchored Asteroids -->
+		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids —>
 		// 
 		for (let j = 0; j < 500; j++) {
 
 			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
 			
-			let starX = Math.floor(Math.random() * Math.floor(-60) + 30)
-			let starY = Math.floor(Math.random() * Math.floor(-60) + 30)
-			let starZ = Math.floor(Math.random() * Math.floor(-60) + 40)
+			let starX = Math.floor(Math.random() * (30 + 60) - 40)
+			let starY = Math.floor(Math.random() * (30 + 60) - 40)
+			let starZ = Math.floor(Math.random() * (30 + 60) - 40)
 			let starScaleAll = 2
 			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30)
 			
