@@ -19,7 +19,7 @@ var smoothing = 0.01;
 var smoothSlider, smoothLabel;
 
 function preload() {
-	soundFile = loadSound(["audio/sade.mp3"]);
+	soundFile = loadSound(["audio/royksopp.mp3"]);
 }
 
 function setup() {
@@ -46,7 +46,8 @@ function setup() {
 }
 
 function mousePressed() {
-	// getAudioContext().resume();
+    // getAudioContext().resume();
+    soundFile.play()
 }
 
 function draw() {
@@ -75,21 +76,21 @@ function draw() {
 }
 
 // on key pressed...
-function keyPressed(e) {
-	// spacebar pauses
-	if (e.keyCode == 32) {
-		if (soundFile.isPlaying()) {
-			soundFile.pause();
-		} else {
-			soundFile.play();
-		}
-	}
+// function keyPressed(e) {
+// 	// spacebar pauses
+// 	if (e.keyCode == 32) {
+// 		if (soundFile.isPlaying()) {
+// 			soundFile.pause();
+// 		} else {
+// 			soundFile.play();
+// 		}
+// 	}
 
-	// 'n' keypress toggles normalize on/off
-	if (e.keyCode == 78) {
-		amplitude.toggleNormalize();
-	}
-}
+// 	// 'n' keypress toggles normalize on/off
+// 	if (e.keyCode == 78) {
+// 		amplitude.toggleNormalize();
+// 	}
+// }
 
 // function mouseClicked() {
 // 	if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
