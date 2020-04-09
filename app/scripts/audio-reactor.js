@@ -2,14 +2,11 @@
  * DEMO:  Use p5.Amplitude (volume) to change the size of an ellipse
  */
 
+let cnv;
 var soundFile;
 var amplitude;
-var volume
-var diameter
-
-let toViz = (num, in_min, in_max, out_min, out_max) => {
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
+var volume;
+var diameter;
 
 // description text
 var description;
@@ -23,15 +20,17 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(400, 400);
+	cnv = createCanvas(100, 100);
 	background(0);
 	noStroke();
-    fill(255);
-    
-    // Trigger playback from within main.js
-    // soundFrame() 
+	fill(255);
 
+	// Trigger playback from within main.js
+	// soundFrame()
 	// soundFile.loop();
+	cnv.mouseClicked(function() {
+		soundFile.play();
+	});
 
 	// create a new p5.Amplitude. Optionally, give it a 'smoothing' value betw 0.0 and .999
 	amplitude = new p5.Amplitude(smoothing);
@@ -46,12 +45,12 @@ function setup() {
 }
 
 function mousePressed() {
-    // getAudioContext().resume();
-    soundFile.play()
+	// getAudioContext().resume();
+	// soundFile.play()
 }
 
 function draw() {
-	background(0);
+	background(50);
 
 	// get volume from the amplitude process
 	volume = amplitude.getLevel();
@@ -61,7 +60,7 @@ function draw() {
 
 	// Change size based on volume. First, map to useful values.
 	diameter = map(volume, 0, 1.0, 25, 400);
-    ellipse(width / 2, height / 2, diameter, diameter);
+	ellipse(width / 2, height / 2, diameter, diameter);
 
 	// instruction text
 	description =
@@ -76,16 +75,16 @@ function draw() {
 }
 
 // on key pressed...
-// function keyPressed(e) {
-// 	// spacebar pauses
-// 	if (e.keyCode == 32) {
-// 		if (soundFile.isPlaying()) {
-// 			soundFile.pause();
-// 		} else {
-// 			soundFile.play();
-// 		}
-// 	}
-
+function keyPressed(e) {
+	// spacebar pauses
+	if (e.keyCode == 32) {
+		if (soundFile.isPlaying()) {
+			soundFile.pause();
+		} else {
+			soundFile.play();
+		}
+	}
+}
 // 	// 'n' keypress toggles normalize on/off
 // 	if (e.keyCode == 78) {
 // 		amplitude.toggleNormalize();

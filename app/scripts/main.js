@@ -20,6 +20,8 @@ AFRAME.registerComponent("twilight-pink", {
 	},
 
 	init: function() {
+		this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
+
 		let data = this.data;
 
 		const sceneEl = document.querySelector("a-scene");
@@ -106,111 +108,35 @@ AFRAME.registerComponent("twilight-pink", {
 				dur: randDur,
 				loop: true
 			});
-			// oneStar.setAttribute("animation__scale", {
-			// 	property: "scale",
-			// 	from: this.data.starScale,
-			// 	to: {x: diameter, y: diameter, z: diameter},
-			// 	easing: "linear",
-			// 	dur: 400,
-			// 	loop: true
-			// });
 
 			this.scalerEls.push(this.oneStar);
 
 			sceneEl.appendChild(this.oneStar);
 		}
-		// console.log('scalerEls: ' + this.scalerEls)
 	},
 
-	tick: function(time, timeDelta) {
-		let oneScaler = 0;
-		if (this.oneScaler >= 100) {
-			this.oneScaler = 0;
-		}
-
-		// this.scalerEls[this.oneScaler].setAttribute("scale", {
-		// 	x: 3,
-		// 	y: 3,
-		// 	z: 3
-		// });
-
-		// console.log('this.scalerEls[this.oneScaler] ' + this.scalerEls[this.oneScaler])
-
-		this.oneScaler++;
-
-		// scaler = function() {
-		// 	console.log(toViz(diameter, 37, 160, 1, 6)); // 0
-		// }
-
-		// scaler = toViz(diameter, 37, 160, 1, 6)
-		// console.log('scaler: ' + scaler)
-
-		// console.log(scale(num, -20, 0, -100, 100)); // 150
-
-		// console.log('aniScale: ' + aniScale.x)
-
-		// var aniEl = this.el;
-
-
-
-
-
-
-
+	tick: function(time, deltaTime) {
 		// https://aframe.io/docs/1.0.0/introduction/best-practices.html
 
-
-
-
-
-
-		const scale = (num, in_min, in_max, out_min, out_max) => {
+		const scaler = (num, in_min, in_max, out_min, out_max) => {
 			return (
 				((num - in_min) * (out_max - out_min)) / (in_max - in_min) +
 				out_min
 			);
 		};
 
-
-
-
 		for (let i = 0; i < this.scalerEls.length; i++) {
+			// let scaleTmp = (this.scaleTmp = this.scaleTmp || { x: 2, y: 2, z: 2 });
 			let theScale = this.scalerEls[i].getAttribute("scale");
-			let mapScale = scale(diameter, 37, 160, 1, 3);
+			// console.log('diameter: ' + diameter)
+			let mapScale = scaler(diameter, 37, 160, 3, 5);
 			theScale.x = mapScale;
 			theScale.y = mapScale;
 			theScale.z = mapScale;
 			this.scalerEls[i].setAttribute("scale", theScale);
-			console.log('theScale: ' + theScale.x)
+			// console.log('theScale: ' + theScale.x)
 		}
-		
-
-
-		var scaleTmp = (this.scaleTmp = this.scaleTmp || { x: 2, y: 2, z: 2 });
-		// var rotation = this.scalerEls[this.oneScaler].getAttribute("scale");
-		// scaleTmp.x = scale(diameter, 37, 160, 1, 6);
-		// scaleTmp.y = scale(diameter, 37, 160, 1, 6);
-		// scaleTmp.z = scale(diameter, 37, 160, 1, 6);
-		// console.log('diameter: ' + diameter)
-		
-		// let mapScale = scale(diameter, 37, 160, 1, 6);
-		
-
-
-		
-		// this.scalerEls[this.oneScaler].setAttribute("scale", scaleTmp);
-
-
-		// console.log("scaleTmp.x: " + scaleTmp.x);
 	}
 });
-
-let soundFrame = () => {
-	console.log("soundFile: " + soundFile);
-	soundFile.pause();
-	setTimeout(function() {
-		soundFile.play();
-	}, 1000);
-};
 
 // https://localhost:9001

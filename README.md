@@ -2,7 +2,7 @@
 
 ![Twilight Pink Screenshot](twilight.png)
 
-# Glitch: https://telling-sticky-mollusk.glitch.me
+# Glitch: https://pink-cubin.glitch.me/
 
 # Refresh the Glitch page to see different arrangements of these deranged cubes.
 
@@ -12,7 +12,7 @@
 
 Goofy, yes. Messing around in a time of crisis.
 
-Watching governor's livestream. Cuomo's brother is infected. Found out last night. Personal side of the governor. This shit's intense.
+Watching governor's livestream. Cuomo's brother is infected. Found out earlier this morning. Personal side of the governor. This shit's intense.
 
 "Sweet guy. But now he's quarantined in the basement."
 
@@ -42,26 +42,21 @@ Please don't take this seriously. I don't. There's already enough serious shit o
 
 ## Working Notes
 
-### A-Frame Upgrade + Broke out Asteroid Belt from Stormed at Sea
+### Audio Reactivity
 
-#### Tuesday, April 7, 2020 at 7:44:13 AM
+#### Thursday, April 9, 2020 at 12:47:38 PM
 
-WebXR wouldn't work in the Quest with existing version of the app. So set out to upgrade aframe. This broke nearly everything. Decided this was a good opportunity to work on the starfield idea I've been wanting to do.
+Have audio reactivity working, but it's really crude.
 
-So stripped out the ocean, sky and particle system. Replaced all that with randomply placed cubes hovering just outside the camera's position. This worked. Ended up keeping the swarming cubes, but now they oribit the randomly placed cubes.
+Playing the audio currently happens via a click on the page. This is great on desktop, but doesn't work in the Quest. The element that triggers the audio isn't shown in VR. Looking for a way of placing the trigger somewhere in VR where I can get to it.
 
-This I like.
+Also looking for a way of playing the audio automatically, as for some reason it currently plays twice on load.
 
-What would really set this off would be audio reactivity. Wondering about this one.
-
-I've got Wednesday off from work, at which point I'll be working on my own shit. Wanna put a fair amount of time into C4D, but this project might make an appearance.
-
-Oh yeah! ... this works beautifully in the Quest. Wanna show Andrey.
-
+ATM taking quite a bit of horsepower to loop through the entire array of elements and adjusting them. It's handled using the afame tick() function to update the cubes' scales. Because of the massive resource hit, I've customized the update's frequency down from 90 frames/sec to something more manageable like every 50ms. Will need to refactor the code or find a new and better solution all together.
 
 ### Customizing look-controls
 
-##### Friday, April 3, 2020 at 11:09:38 PM
+#### Friday, April 3, 2020 at 11:09:38 PM
 
 https://aframe.io/docs/1.0.0/components/look-controls.html#customizing-look-controls
 

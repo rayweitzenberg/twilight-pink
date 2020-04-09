@@ -5,10 +5,11 @@ a-scene {
 #defaultCanvas0 {
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
 }
 
 p {
+  display: none;
   position: absolute;
   bottom: 80px;
   color: white;
