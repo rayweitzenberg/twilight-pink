@@ -48,21 +48,19 @@ function setup() {
 	smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
 	// smoothLabel = createP("Smoothing: " + smoothing);
 
-	soundFile.addCue(48, cuedUp, "cueOne");
-	soundFile.addCue(20, cuedUp, "cueTwo");
+	soundFile.addCue(48, cuedUp, "tomato");
+	soundFile.addCue(63.5, cuedUp, "deepskyblue");
 	// soundFile.addCue(6, cuedUp, "cueThree");
 }
 
 
 cuedUp = (val) => {
-	if (val == "cueOne") {
+	if (val == "tomato") {
 		theColor = "tomato";
-	} else if (val == "cueTwo") {
+		console.log('48')
+	} else if (val == "deepskyblue") {
 		theColor = "deepskyblue";
-	} else if (val == "cueThree") {
-		theColor = "deepskyblue";
-	} else {
-		theColor = "purple";
+		console.log('63.5')
 	}
 };
 

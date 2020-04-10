@@ -136,8 +136,10 @@ AFRAME.registerComponent("twilight-pink", {
 	},
 
 	tick: function (time, deltaTime) {
+		// ————————————————————————————————————o Animating scale -->
+		// Animating scale based on sound volume -->
+		//
 		for (let i = 0; i < this.scalerEls.length; i++) {
-			// let scaleTmp = (this.scaleTmp = this.scaleTmp || { x: 2, y: 2, z: 2 });
 			let theScale = this.scalerEls[i].getAttribute("scale");
 			// console.log('diameter: ' + diameter)
 			let mapScale = this.scaler(diameter, 37, 160, 3, 5);
@@ -147,9 +149,11 @@ AFRAME.registerComponent("twilight-pink", {
 			this.scalerEls[i].setAttribute("scale", theScale);
 			// console.log('theScale: ' + theScale.x)
 
+
+			// ————————————————————————————————————o Changing Colors on Cues -->
+			// Changing Colors on Cues -->
+			//
 			this.scalerEls[i].setAttribute("material", { color: theColor });
-			// cuedUp()
-			// console.log('tomato  ' + theColor)
 		}
 	},
 });
