@@ -31,11 +31,13 @@ AFRAME.registerComponent("twilight-pink", {
 
 		let randDur = Math.random() * 8600 + 6500;
 
+		// ————————————————————————————————————o Trigger Audio Play -->
+		// Trigger Audio Play -->
+		//
 		// sceneEl.addEventListener("triggerdown", function (evt) {
 		// 	soundFile.play();
 		// 	console.log("Trigger Down");
 		// });
-
 		sceneEl.addEventListener("enter-vr", function () {
 			soundFile.play();
 		});
@@ -143,21 +145,18 @@ AFRAME.registerComponent("twilight-pink", {
 		// sceneEl.appendChild(this.trigger);
 	},
 
+	scaler: function (num, in_min, in_max, out_min, out_max) {
+		return (
+			((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+		);
+	},
+
 	tick: function (time, deltaTime) {
-		// https://aframe.io/docs/1.0.0/introduction/best-practices.html
-
-		const scaler = (num, in_min, in_max, out_min, out_max) => {
-			return (
-				((num - in_min) * (out_max - out_min)) / (in_max - in_min) +
-				out_min
-			);
-		};
-
 		for (let i = 0; i < this.scalerEls.length; i++) {
 			// let scaleTmp = (this.scaleTmp = this.scaleTmp || { x: 2, y: 2, z: 2 });
 			let theScale = this.scalerEls[i].getAttribute("scale");
 			// console.log('diameter: ' + diameter)
-			let mapScale = scaler(diameter, 37, 160, 3, 5);
+			let mapScale = this.scaler(diameter, 37, 160, 3, 5);
 			theScale.x = mapScale;
 			theScale.y = mapScale;
 			theScale.z = mapScale;
@@ -168,11 +167,4 @@ AFRAME.registerComponent("twilight-pink", {
 });
 
 // https://localhost:9001
-
-// sceneEl
-// .addEventListener("triggerdown", function (evt) {
-// 	soundFile.play();
-// 	console.log(
-// 		"Trigger Down"
-// 	);
-// });
+// https://aframe.io/docs/1.0.0/introduction/best-practices.html
