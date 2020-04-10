@@ -17,3 +17,15 @@ p {
     bottom: 40px;
   }
 }
+
+.glitchRemix {
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  img {
+    background-color: white;
+    border: 1px solid white;
+  }
+}

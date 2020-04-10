@@ -18,7 +18,6 @@ AFRAME.registerComponent("twilight-pink", {
 		orbitColor: { type: "color", default: "#37428A" },
 		anchColor: { type: "color", default: "#EF2D5E" },
 		theColor: { type: "color", default: "#EF2D5E" },
-		triggerColor: { type: "color", default: "#ffffff" },
 	},
 
 	init: function () {
