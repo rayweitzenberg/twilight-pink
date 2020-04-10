@@ -4,9 +4,15 @@
 
 let cnv;
 var soundFile;
+let addCue;
+let cuedUp
 var amplitude;
 var volume;
 var diameter;
+let changeText;
+let timeline01;
+let theColor;
+let colorTwo
 
 // description text
 var description;
@@ -16,7 +22,9 @@ var smoothing = 0.01;
 var smoothSlider, smoothLabel;
 
 function preload() {
-	soundFile = loadSound("https://cdn.glitch.com/f5e18228-4ad6-44e5-8691-28fc5f4b1dc6%2Froyksopp.mp3?v=1586317404647");
+	soundFile = loadSound(
+		"https://cdn.glitch.com/f5e18228-4ad6-44e5-8691-28fc5f4b1dc6%2Froyksopp.mp3?v=1586317404647"
+	);
 }
 
 function setup() {
@@ -25,10 +33,7 @@ function setup() {
 	noStroke();
 	fill(255);
 
-	// Trigger playback from within main.js
-	// soundFrame()
-	// soundFile.loop();
-	cnv.mouseClicked(function() {
+	cnv.mouseClicked(function () {
 		soundFile.play();
 	});
 
@@ -42,12 +47,24 @@ function setup() {
 
 	smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
 	// smoothLabel = createP("Smoothing: " + smoothing);
+
+	soundFile.addCue(48, cuedUp, "cueOne");
+	soundFile.addCue(20, cuedUp, "cueTwo");
+	// soundFile.addCue(6, cuedUp, "cueThree");
 }
 
-function mousePressed() {
-	// getAudioContext().resume();
-	// soundFile.play()
-}
+
+cuedUp = (val) => {
+	if (val == "cueOne") {
+		theColor = "tomato";
+	} else if (val == "cueTwo") {
+		theColor = "deepskyblue";
+	} else if (val == "cueThree") {
+		theColor = "deepskyblue";
+	} else {
+		theColor = "purple";
+	}
+};
 
 function draw() {
 	background(50);
@@ -72,6 +89,12 @@ function draw() {
 	smoothing = smoothSlider.value() / 100;
 	// smoothLabel.html("Smoothing: " + smoothing);
 	amplitude.smooth(smoothing);
+
+
+	soundFile.addCue(3, cuedUp, "cueThree");
+
+
+	
 }
 
 // on key pressed...

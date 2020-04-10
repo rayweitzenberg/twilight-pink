@@ -17,6 +17,7 @@ AFRAME.registerComponent("twilight-pink", {
 		sadeScale: { type: "vec3", default: { x: 9, y: 8, z: 8 } },
 		orbitColor: { type: "color", default: "#37428A" },
 		anchColor: { type: "color", default: "#EF2D5E" },
+		theColor: { type: "color", default: "#EF2D5E" },
 		triggerColor: { type: "color", default: "#ffffff" },
 	},
 
@@ -46,7 +47,7 @@ AFRAME.registerComponent("twilight-pink", {
 		// Cubing -->
 		// ————————————————————————————————————o————————————————————————————————————o Cubing —>
 		//
-		for (let i = 0; i < 60; i++) {
+		for (let i = 0; i < 20; i++) {
 			let randDur = Math.random() * 8600 + 6500;
 
 			// ————————————————————————————————————o Need boxHldr to enable orbting -->
@@ -92,7 +93,7 @@ AFRAME.registerComponent("twilight-pink", {
 		// Anchored Asteroids -->
 		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids —>
 		//
-		for (let j = 0; j < 100; j++) {
+		for (let j = 0; j < 200; j++) {
 			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
 
 			let starX = Math.floor(Math.random() * (30 + 60) - 40);
@@ -125,6 +126,7 @@ AFRAME.registerComponent("twilight-pink", {
 			sceneEl.appendChild(this.oneStar);
 		}
 	},
+
 	// ————————————————————————————————————o Mapping audio data -->
 	// Method to handle mapping of audio data -->
 	scaler: function (num, in_min, in_max, out_min, out_max) {
@@ -144,9 +146,13 @@ AFRAME.registerComponent("twilight-pink", {
 			theScale.z = mapScale;
 			this.scalerEls[i].setAttribute("scale", theScale);
 			// console.log('theScale: ' + theScale.x)
+
+			this.scalerEls[i].setAttribute("material", { color: theColor });
+			// cuedUp()
+			// console.log('tomato  ' + theColor)
 		}
 	},
 });
 
-// https://localhost:9001
+// https://localhost:9000
 // https://aframe.io/docs/1.0.0/introduction/best-practices.html
