@@ -124,27 +124,9 @@ AFRAME.registerComponent("twilight-pink", {
 			this.scalerEls.push(this.oneStar);
 			sceneEl.appendChild(this.oneStar);
 		}
-
-		// ————————————————————————————————————o————————————————————————————————————o Audio Trigger -->
-		// Audio Trigger -->
-		// ————————————————————————————————————o————————————————————————————————————o Audio Trigger —>
-		//
-		// let trigger;
-		// this.trigger = document.createElement("a-box");
-		// this.trigger.setAttribute("id", "trigger");
-		// this.trigger.setAttribute("scale", { x: 3, y: 3, z: 3 });
-		// this.trigger.setAttribute("material", "color", "blue");
-		// this.trigger.setAttribute("position", { x: 0, y: 0, z: -10 });
-		// this.trigger
-		// 	.addEventListener("triggerdown", function (evt) {
-		// 		soundFile.play();
-		// 		console.log(
-		// 			"This A-Frame entity collided with another entity!"
-		// 		);
-		// 	});
-		// sceneEl.appendChild(this.trigger);
 	},
-
+	// ————————————————————————————————————o Mapping audio data -->
+	// Method to handle mapping of audio data -->
 	scaler: function (num, in_min, in_max, out_min, out_max) {
 		return (
 			((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
