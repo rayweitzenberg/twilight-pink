@@ -16,7 +16,7 @@ var smoothing = 0.01;
 var smoothSlider, smoothLabel;
 
 function preload() {
-	soundFile = loadSound(["audio/royksopp.mp3"]);
+	soundFile = loadSound("https://cdn.glitch.com/f5e18228-4ad6-44e5-8691-28fc5f4b1dc6%2Froyksopp.mp3?v=1586317404647");
 }
 
 function setup() {
@@ -36,12 +36,12 @@ function setup() {
 	amplitude = new p5.Amplitude(smoothing);
 
 	// instruction text
-	description =
-		'Spacebar: pause/unpause the loop. <br>Press "N" to toggle Normalize';
-	p1 = createP(description);
+	// description =
+	// 	'Spacebar: pause/unpause the loop. <br>Press "N" to toggle Normalize';
+	// p1 = createP(description);
 
 	smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
-	smoothLabel = createP("Smoothing: " + smoothing);
+	// smoothLabel = createP("Smoothing: " + smoothing);
 }
 
 function mousePressed() {
@@ -63,14 +63,14 @@ function draw() {
 	ellipse(width / 2, height / 2, diameter, diameter);
 
 	// instruction text
-	description =
-		'Spacebar: pause/unpause the loop. <br>Press "N" to toggle Normalize. Normalized is ' +
-		amplitude.normalize;
-	p1.html(description);
+	// description =
+	// 	'Spacebar: pause/unpause the loop. <br>Press "N" to toggle Normalize. Normalized is ' +
+	// 	amplitude.normalize;
+	// p1.html(description);
 
 	// change smoothing
 	smoothing = smoothSlider.value() / 100;
-	smoothLabel.html("Smoothing: " + smoothing);
+	// smoothLabel.html("Smoothing: " + smoothing);
 	amplitude.smooth(smoothing);
 }
 

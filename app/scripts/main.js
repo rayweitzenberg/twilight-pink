@@ -10,16 +10,17 @@ AFRAME.registerComponent("twilight-pink", {
 	schema: {
 		randDur: {
 			type: "int",
-			default: Math.floor(Math.random() * 8600 + 6500)
+			default: Math.floor(Math.random() * 8600 + 6500),
 		},
 		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		sadeScale: { type: "vec3", default: { x: 9, y: 8, z: 8 } },
 		orbitColor: { type: "color", default: "#37428A" },
-		anchColor: { type: "color", default: "#EF2D5E" }
+		anchColor: { type: "color", default: "#EF2D5E" },
+		triggerColor: { type: "color", default: "#ffffff" },
 	},
 
-	init: function() {
+	init: function () {
 		this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
 
 		let data = this.data;
@@ -29,6 +30,15 @@ AFRAME.registerComponent("twilight-pink", {
 		this.scalerEls = [];
 
 		let randDur = Math.random() * 8600 + 6500;
+
+		// sceneEl.addEventListener("triggerdown", function (evt) {
+		// 	soundFile.play();
+		// 	console.log("Trigger Down");
+		// });
+
+		sceneEl.addEventListener("enter-vr", function () {
+			soundFile.play();
+		});
 
 		// ————————————————————————————————————o————————————————————————————————————o Cubing -->
 		// Cubing -->
@@ -47,7 +57,7 @@ AFRAME.registerComponent("twilight-pink", {
 				to: "0 360 0", // Orbit around Y axis
 				easing: "linear",
 				dur: randDur, // Random duration of orbit
-				loop: true
+				loop: true,
 			});
 
 			// ————————————————————————————————————o Boxes -->
@@ -67,7 +77,7 @@ AFRAME.registerComponent("twilight-pink", {
 				to: "360 360 360",
 				easing: "linear",
 				dur: randDur,
-				loop: true
+				loop: true,
 			});
 
 			sceneEl.appendChild(boxHldr);
@@ -98,7 +108,7 @@ AFRAME.registerComponent("twilight-pink", {
 			this.oneStar.setAttribute("position", {
 				x: starX,
 				y: starY,
-				z: starZ
+				z: starZ,
 			});
 			this.oneStar.setAttribute("animation", {
 				property: "rotation",
@@ -106,16 +116,34 @@ AFRAME.registerComponent("twilight-pink", {
 				to: "360 360 360",
 				easing: "linear",
 				dur: randDur,
-				loop: true
+				loop: true,
 			});
 
 			this.scalerEls.push(this.oneStar);
-
 			sceneEl.appendChild(this.oneStar);
 		}
+
+		// ————————————————————————————————————o————————————————————————————————————o Audio Trigger -->
+		// Audio Trigger -->
+		// ————————————————————————————————————o————————————————————————————————————o Audio Trigger —>
+		//
+		// let trigger;
+		// this.trigger = document.createElement("a-box");
+		// this.trigger.setAttribute("id", "trigger");
+		// this.trigger.setAttribute("scale", { x: 3, y: 3, z: 3 });
+		// this.trigger.setAttribute("material", "color", "blue");
+		// this.trigger.setAttribute("position", { x: 0, y: 0, z: -10 });
+		// this.trigger
+		// 	.addEventListener("triggerdown", function (evt) {
+		// 		soundFile.play();
+		// 		console.log(
+		// 			"This A-Frame entity collided with another entity!"
+		// 		);
+		// 	});
+		// sceneEl.appendChild(this.trigger);
 	},
 
-	tick: function(time, deltaTime) {
+	tick: function (time, deltaTime) {
 		// https://aframe.io/docs/1.0.0/introduction/best-practices.html
 
 		const scaler = (num, in_min, in_max, out_min, out_max) => {
@@ -136,7 +164,15 @@ AFRAME.registerComponent("twilight-pink", {
 			this.scalerEls[i].setAttribute("scale", theScale);
 			// console.log('theScale: ' + theScale.x)
 		}
-	}
+	},
 });
 
 // https://localhost:9001
+
+// sceneEl
+// .addEventListener("triggerdown", function (evt) {
+// 	soundFile.play();
+// 	console.log(
+// 		"Trigger Down"
+// 	);
+// });

@@ -7,8 +7,6 @@
 			content="Asteroid Belt. Both anchored cubes orbitted by stalking twirlers."
 		/>
 		<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-		<!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script> -->
 		<title>Asteroid Belt</title>
 		<!-- build:css styles/main.css -->
 		<link rel="stylesheet" href="styles/main.css" />
@@ -22,18 +20,11 @@
 		<script src="scripts/main.js"></script>
 
 		<a-scene twilight-pink>
+			<a-entity oculus-touch-controls="hand: right"></a-entity>
 
-			<a-entity 
-				id="light"
-				light="type: ambient; color: #5667D5">
-			</a-entity>
+			<a-entity light="type: ambient; color: #5667D5"> </a-entity>
 
-			<a-entity
-				id="pointLight"
-				light="type: point; intensity: 2"
-			></a-entity>
-
+			<a-entity light="type: point; intensity: 2"></a-entity>
 		</a-scene>
-
 	</body>
 </html>
