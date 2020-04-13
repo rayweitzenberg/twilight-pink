@@ -27,17 +27,21 @@ function setup() {
 		soundFile.play();
 	});
 
-	let button
-	button = createButton('Play Musics');
-	button.position(25, windowHeight - 59);
-	button.style('padding', '5px 10px');
-	button.style('font-size', '20px');
-	button.style('border-radius', '8px')
-	button.mouseClicked(function() {
+	// ————————————————————————————————————o Play Button -->
+	// Play Button -->
+	//
+	let button;
+	button = createButton("PLAY");
+	button.position(25, windowHeight - 55);
+	button.style("padding", "5px 10px");
+	button.style("font-size", "20px");
+	button.style("font-weight", "bold");
+	button.style("border-radius", "8px");
+	button.mouseClicked(function () {
 		soundFile.play();
 	});
 
-	cnv.html(text, true)
+	cnv.html(text, true);
 
 	// create a new p5.Amplitude. Optionally, give it a 'smoothing' value betw 0.0 and .999
 	amplitude = new p5.Amplitude(smoothing);
@@ -45,14 +49,21 @@ function setup() {
 	smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
 	// smoothLabel = createP("Smoothing: " + smoothing);
 
-	soundFile.addCue(47.9, cuedUp, "cue01");
-	soundFile.addCue(63.6, cuedUp, "cue02");
+	// ————————————————————————————————————o Audio Cues -->
+	// Audio Cues -->
+	//
+	soundFile.addCue(47.7, cuedUp, "cue01");
+	soundFile.addCue(63.2, cuedUp, "cue02");
 	soundFile.addCue(102.6, cuedUp, "cue03");
+	soundFile.addCue(110.2, cuedUp, "cue03b");
 	soundFile.addCue(141.6, cuedUp, "cue04");
-	soundFile.addCue(157.6, cuedUp, "cue05");
+	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
 }
 
+// ————————————————————————————————————o Audio Cue Logic -->
+// Audio Cue Logic -->
+//
 cuedUp = (val) => {
 	switch (val) {
 		case "cue01":
@@ -66,6 +77,10 @@ cuedUp = (val) => {
 		case "cue03":
 			theColor = "#EF2D5E";
 			console.log("102.6");
+			break;
+		case "cue03b":
+			theColor = "deepskyblue";
+			console.log("cue03b");
 			break;
 		case "cue04":
 			theColor = "tomato";
