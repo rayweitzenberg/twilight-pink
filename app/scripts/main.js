@@ -16,6 +16,8 @@ AFRAME.registerComponent("sky-walking", {
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		orbitColor: { type: "color", default: "#37428A" },
 		staticColor: { type: "color", default: "#EF2D5E" },
+		grandTotalRot: { type: "int", default: 0 },
+		countingRot: { type: "vec3", default: { x: 0, y: 0, z: 0 } },
 	},
 
 	init: function () {
@@ -24,18 +26,17 @@ AFRAME.registerComponent("sky-walking", {
 		let data = this.data;
 
 		const sceneEl = document.querySelector("a-scene");
-		
+
 		this.staticConts = [];
-		console.log('newRotY: ' + newRotY)
 		this.oneScaler = 0;
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
-		this.oldColor
-		this.oldRotation
-		this.oldDurat = false
-		this.duratTrigger = false
-		
+		this.oldColor;
+		// this.countingRot = 0;
+		this.directionRot = false;
+
 		let randDur = Math.random() * 8600 + 6500;
+		this.injectRot = 180;
 
 		// ————————————————————————————————————o Trigger Audio Play -->
 		// Trigger Audio Play -->
@@ -48,9 +49,9 @@ AFRAME.registerComponent("sky-walking", {
 			soundFile.play();
 		});
 
-		// ————————————————————————————————————o————————————————————————————————————o Cubing -->
-		// Cubing -->
-		// ————————————————————————————————————o————————————————————————————————————o Cubing —>
+		// ————————————————————————————————————o————————————————————————————————————o Low earth wOrbit -->
+		// Low earth wOrbit -->
+		// ————————————————————————————————————o————————————————————————————————————o Low earth wOrbit —>
 		//
 		for (let i = 0; i < 20; i++) {
 			let randDur = Math.random() * 8600 + 6500;
@@ -79,7 +80,11 @@ AFRAME.registerComponent("sky-walking", {
 			orbiter.setAttribute("id", "orbiter-" + i);
 			orbiter.setAttribute("scale", data.orbiterScale);
 			orbiter.setAttribute("material", { color: data.orbitColor });
-			orbiter.setAttribute("position", { x: orbiterX, y: orbiterY, z: orbiterZ });
+			orbiter.setAttribute("position", {
+				x: orbiterX,
+				y: orbiterY,
+				z: orbiterZ,
+			});
 			orbiter.setAttribute("animation", {
 				property: "rotation",
 				to: "360 360 360",
@@ -104,13 +109,13 @@ AFRAME.registerComponent("sky-walking", {
 			// ————————————————————————————————————o Need staticHldr to enable orbting -->
 			// Need staticHldr to enable orbting animation -->
 			//
-			let staticHldr = this.staticHldr
+			let staticHldr = this.staticHldr;
 			staticHldr = document.createElement("a-entity");
 			staticHldr.setAttribute("id", "staticHldr-" + j);
 			staticHldr.setAttribute("animation", {
 				property: "rotation",
 				// to: "0 0 0", // Orbit around Y axis
-				to: {x: 0, y: newRotY, z: 0}, // Orbit around Y axis
+				to: { x: 0, y: newRotY, z: 0 }, // Orbit around Y axis
 				easing: "linear",
 				dur: this.data.randDur, // Random duration of orbit
 				loop: true,
@@ -149,7 +154,7 @@ AFRAME.registerComponent("sky-walking", {
 			this.staticConts.push(staticHldr);
 			this.scalerEls.push(oneStatic);
 			sceneEl.appendChild(staticHldr);
-			staticHldr.appendChild(oneStatic)
+			staticHldr.appendChild(oneStatic);
 		}
 	},
 
@@ -185,24 +190,32 @@ AFRAME.registerComponent("sky-walking", {
 		}
 	},
 
-	// ————————————————————————————————————o Changing Colors on Cues -->
+	// ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
 	// Triggered in tick() below -->
 	//
-	setNewRot: function (newColor) {
+	setNewRot: function (changeRot) {
+
+		let changingRot = this.data.countingRot.y
+		// console.log('changingRot: ' + changingRot)
+
+		// ——————————————————o Set Direction of Orbit -->
+		if (directionRot) {
+			changingRot = 0
+		} else {
+			changingRot = 360
+		}
+
 		for (let i = 0; i < this.staticConts.length; i++) {
-			if (this.oldDurat != duratTrigger) {
-				this.theDurat = Math.random() * 8600 + 6500;
-				// duratTrigger = false
-				console.log('this.theDurat true :' + this.theDurat)
-			} else {
-				this.theDurat = 8000
-				console.log('this.theDurat false :' + this.theDurat)
-			}
 			this.staticConts[i].setAttribute("animation", {
 				property: "rotation",
-				to: {x: 0, y: newRotY, z: 0}, // Orbit around Y axis
+				// to: "0 360 0",
+				to: {
+					x: this.data.countingRot.x,
+					y: changingRot,
+					z: this.data.countingRot.z,
+				},
 				easing: "linear",
-				dur: this.theDurat, // Random duration of orbit
+				dur: 12000,
 				loop: true,
 			});
 		}
@@ -225,13 +238,10 @@ AFRAME.registerComponent("sky-walking", {
 			this.oldColor = theColor;
 		}
 
-		// ————————————————————————————————————o Changing Colors on Cues -->
-		// setColor() above -->
+		// ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
+		// setNewRot() above -->
 		//
-		if (this.oldRotation != newRotY) {
-			this.setNewRot(newRotY);
-			this.oldRotation = newRotY;
-		}
+		this.setNewRot();
 	},
 });
 

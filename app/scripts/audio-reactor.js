@@ -14,7 +14,7 @@ let theColor = "#EF2D5E";
 var smoothing = 0.01;
 var smoothSlider, smoothLabel;
 let newRotY = 0;
-let duratTrigger = false;
+let directionRot = true
 let newDurat = 0;
 
 function preload() {
@@ -58,9 +58,10 @@ function setup() {
 	soundFile.addCue(141.6, cuedUp, "cue04");
 	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
+	
 	// soundFile.addCue(5, cuedUp, "tempCue01");
-	// soundFile.addCue(10, cuedUp, "tempCue02");
-	// soundFile.addCue(15, cuedUp, "tempCue03");
+	// soundFile.addCue(15, cuedUp, "tempCue02");
+	// soundFile.addCue(25, cuedUp, "tempCue03");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -70,53 +71,57 @@ cuedUp = (val) => {
 	switch (val) {
 		case "cue01":
 			theColor = "deepskyblue";
-			console.log("47.9");
+			console.log("cue01: deepskyblue");
 			break;
 		case "cue02":
 			theColor = "tomato";
-			console.log("63.6");
+			console.log("cue01: deepskyblue");
 			break;
 		case "cue03":
 			theColor = "#EF2D5E";
-			console.log("102.6");
+			console.log("cue03: #EF2D5E");
 			break;
 		case "cue03b":
 			theColor = "tomato";
-			console.log("cue03b");
-			newRotY = 360;	// ——————————————————o Rotation -->
-			newDurat = Math.random() * 11600 + 8500;
+			directionRot = false; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
+			console.log("cue03b: tomato");
 			break;
 		case "cue04":
 			theColor = "deepskyblue";
-			console.log("141.6");
+			directionRot = true; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
+			console.log("cue04: deepskyblue");
 			break;
 		case "cue05":
 			theColor = "tomato";
-			newRotY = 0;	// ——————————————————o Rotation -->
-			console.log("157.6");
+			directionRot = false; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
+			console.log("cue05: tomato");
 			break;
 		case "cue06":
 			theColor = "#EF2D5E";
-			console.log("172.6");
+			newDurat = Math.random() * 11600 + 8500;
+			console.log("cue06: #EF2D5");
 			break;
 
+		// ————————————————————————————————————o testing cue points -->
+		// testing cue points -->
+		//
 		case "tempCue01":
 			theColor = "deepskyblue";
-			newRotY = 360;
-			// newDurat = Math.random() * 11600 + 8500;
-			// console.log("newRotY: " + newRotY);
+			directionRot = false; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
 			break;
 		case "tempCue02":
 			theColor = "tomato";
-			// newRotY = -360;
-			duratTrigger = true;
-			console.log("duratTrigger: " + duratTrigger);
+			directionRot = true; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
 			break;
 		case "tempCue03":
 			theColor = "deepskyblue";
-			// newRotY = -360;
-			duratTrigger = false;
-			console.log("duratTrigger: " + duratTrigger);
+			directionRot = false; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
 			break;
 	}
 };
