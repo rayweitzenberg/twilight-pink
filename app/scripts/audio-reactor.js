@@ -32,11 +32,7 @@ function setup() {
 	//
 	let button;
 	button = createButton("PLAY");
-	button.position(25, windowHeight - 55);
-	button.style("padding", "5px 10px");
-	button.style("font-size", "20px");
-	button.style("font-weight", "bold");
-	button.style("border-radius", "8px");
+	button.id('playBtn')
 	button.mouseClicked(function () {
 		soundFile.play();
 	});
@@ -68,11 +64,11 @@ function setup() {
 cuedUp = (val) => {
 	switch (val) {
 		case "cue01":
-			theColor = "tomato";
+			theColor = "deepskyblue";
 			console.log("47.9");
 			break;
 		case "cue02":
-			theColor = "deepskyblue";
+			theColor = "tomato";
 			console.log("63.6");
 			break;
 		case "cue03":
@@ -80,15 +76,15 @@ cuedUp = (val) => {
 			console.log("102.6");
 			break;
 		case "cue03b":
-			theColor = "deepskyblue";
+			theColor = "tomato";
 			console.log("cue03b");
 			break;
 		case "cue04":
-			theColor = "tomato";
+			theColor = "deepskyblue";
 			console.log("141.6");
 			break;
 		case "cue05":
-			theColor = "deepskyblue";
+			theColor = "tomato";
 			console.log("157.6");
 			break;
 		case "cue06":
