@@ -58,9 +58,9 @@ function setup() {
 	soundFile.addCue(141.6, cuedUp, "cue04");
 	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
-	soundFile.addCue(5, cuedUp, "tempCue01");
-	soundFile.addCue(10, cuedUp, "tempCue02");
-	soundFile.addCue(15, cuedUp, "tempCue03");
+	// soundFile.addCue(5, cuedUp, "tempCue01");
+	// soundFile.addCue(10, cuedUp, "tempCue02");
+	// soundFile.addCue(15, cuedUp, "tempCue03");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -78,13 +78,12 @@ cuedUp = (val) => {
 			break;
 		case "cue03":
 			theColor = "#EF2D5E";
-			newRotY = 360;
 			console.log("102.6");
 			break;
 		case "cue03b":
 			theColor = "tomato";
 			console.log("cue03b");
-			newRotY = 360;
+			newRotY = 360;	// ——————————————————o Rotation -->
 			newDurat = Math.random() * 11600 + 8500;
 			break;
 		case "cue04":
@@ -93,6 +92,7 @@ cuedUp = (val) => {
 			break;
 		case "cue05":
 			theColor = "tomato";
+			newRotY = 0;	// ——————————————————o Rotation -->
 			console.log("157.6");
 			break;
 		case "cue06":

@@ -12,7 +12,7 @@ AFRAME.registerComponent("sky-walking", {
 			type: "int",
 			default: Math.floor(Math.random() * 8600 + 6500),
 		},
-		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
+		orbiterScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		orbitColor: { type: "color", default: "#37428A" },
 		staticColor: { type: "color", default: "#EF2D5E" },
@@ -55,12 +55,12 @@ AFRAME.registerComponent("sky-walking", {
 		for (let i = 0; i < 20; i++) {
 			let randDur = Math.random() * 8600 + 6500;
 
-			// ————————————————————————————————————o Need boxHldr to enable orbting -->
-			// Need boxHldr to enable orbting animation -->
+			// ————————————————————————————————————o Need orbiterHldr to enable orbting -->
+			// Need orbiterHldr to enable orbting animation -->
 			//
-			let boxHldr = document.createElement("a-entity");
-			boxHldr.setAttribute("id", "boxHldr-" + i);
-			boxHldr.setAttribute("animation", {
+			let orbiterHldr = document.createElement("a-entity");
+			orbiterHldr.setAttribute("id", "orbiterHldr-" + i);
+			orbiterHldr.setAttribute("animation", {
 				property: "rotation",
 				to: "0 360 0", // Orbit around Y axis
 				easing: "linear",
@@ -71,16 +71,16 @@ AFRAME.registerComponent("sky-walking", {
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
-			let boxX = Math.floor(Math.random() * Math.floor(50) + 10);
-			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20);
-			let boxZ = Math.floor(Math.random() * Math.floor(-40) - 15);
+			let orbiterX = Math.floor(Math.random() * Math.floor(-30) + 30);
+			let orbiterY = Math.floor(Math.random() * Math.floor(-50) + 30);
+			let orbiterZ = Math.floor(Math.random() * Math.floor(-15) - 15);
 
-			let boxer = document.createElement("a-box");
-			boxer.setAttribute("id", "boxer-" + i);
-			boxer.setAttribute("scale", data.boxScale);
-			boxer.setAttribute("material", { color: data.orbitColor });
-			boxer.setAttribute("position", { x: boxX, y: boxY, z: boxZ });
-			boxer.setAttribute("animation", {
+			let orbiter = document.createElement("a-box");
+			orbiter.setAttribute("id", "orbiter-" + i);
+			orbiter.setAttribute("scale", data.orbiterScale);
+			orbiter.setAttribute("material", { color: data.orbitColor });
+			orbiter.setAttribute("position", { x: orbiterX, y: orbiterY, z: orbiterZ });
+			orbiter.setAttribute("animation", {
 				property: "rotation",
 				to: "360 360 360",
 				easing: "linear",
@@ -88,8 +88,8 @@ AFRAME.registerComponent("sky-walking", {
 				loop: true,
 			});
 
-			sceneEl.appendChild(boxHldr);
-			boxHldr.appendChild(boxer); // Put boxer in a parent container to achieve orbital rotation
+			sceneEl.appendChild(orbiterHldr);
+			orbiterHldr.appendChild(orbiter); // Put orbiter in a parent container to achieve orbital rotation
 
 			// I can't kick this feelin when it hits
 		}
