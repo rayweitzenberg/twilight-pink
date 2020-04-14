@@ -28,7 +28,6 @@ AFRAME.registerComponent("sky-walking", {
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
 		this.oldColor
-		
 		let randDur = Math.random() * 8600 + 6500;
 
 		// ————————————————————————————————————o Trigger Audio Play -->
@@ -67,7 +66,7 @@ AFRAME.registerComponent("sky-walking", {
 			//
 			let boxX = Math.floor(Math.random() * Math.floor(50) + 10);
 			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20);
-			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 5);
+			let boxZ = Math.floor(Math.random() * Math.floor(-40) - 15);
 
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
@@ -95,24 +94,37 @@ AFRAME.registerComponent("sky-walking", {
 		for (let j = 0; j < 200; j++) {
 			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
 
+			// ————————————————————————————————————o Need staticHldr to enable orbting -->
+			// Need staticHldr to enable orbting animation -->
+			//
+			let staticHldr = document.createElement("a-entity");
+			staticHldr.setAttribute("id", "staticHldr-" + j);
+			staticHldr.setAttribute("animation", {
+				property: "rotation",
+				to: "0 360 0", // Orbit around Y axis
+				easing: "linear",
+				dur: randDur, // Random duration of orbit
+				loop: true,
+			});
+
 			let starX = Math.floor(Math.random() * (30 + 60) - 40);
 			let starY = Math.floor(Math.random() * (30 + 60) - 40);
 			let starZ = Math.floor(Math.random() * (30 + 60) - 40);
 			let starScaleAll = 2;
 			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30);
 
-			let oneStar = this.oneStar;
-			oneStar = document.createElement("a-box");
-			oneStar.setAttribute("id", "oneStar-" + j);
-			oneStar.setAttribute("scale", this.data.starScale);
-			// this.oneStar.setAttribute("scale", {x: 8, y: 8, z: 8});
-			oneStar.setAttribute("material", { color: data.staticColor });
-			oneStar.setAttribute("position", {
+			let oneStatic = this.oneStatic;
+			oneStatic = document.createElement("a-box");
+			oneStatic.setAttribute("id", "oneStatic-" + j);
+			oneStatic.setAttribute("scale", this.data.starScale);
+			// this.oneStatic.setAttribute("scale", {x: 8, y: 8, z: 8});
+			oneStatic.setAttribute("material", { color: data.staticColor });
+			oneStatic.setAttribute("position", {
 				x: starX,
 				y: starY,
 				z: starZ,
 			});
-			oneStar.setAttribute("animation", {
+			oneStatic.setAttribute("animation", {
 				property: "rotation",
 				from: "180 180 180",
 				to: "360 360 360",
@@ -121,12 +133,13 @@ AFRAME.registerComponent("sky-walking", {
 				loop: true,
 			});
 
-			oneStar.eventHandlerFn = function () {
+			oneStatic.eventHandlerFn = function () {
 				console.log(self.data.tmpColor);
 			};
 
-			this.scalerEls.push(oneStar);
-			sceneEl.appendChild(oneStar);
+			this.scalerEls.push(oneStatic);
+			sceneEl.appendChild(staticHldr);
+			staticHldr.appendChild(oneStatic)
 		}
 	},
 
