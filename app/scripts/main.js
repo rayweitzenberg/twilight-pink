@@ -3,7 +3,7 @@
 // Sam's "The Vaccine" playlist
 // Wild times we're living in
 //
-AFRAME.registerComponent("twilight-pink", {
+AFRAME.registerComponent("sky-walking", {
 	// ————————————————————————————————————o Settings Settings -->
 	// Settings Settings -->
 	//
