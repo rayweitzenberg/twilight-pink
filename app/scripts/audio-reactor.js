@@ -13,7 +13,9 @@ var diameter;
 let theColor = "#EF2D5E";
 var smoothing = 0.01;
 var smoothSlider, smoothLabel;
-let newRotY = 0
+let newRotY = 0;
+let duratTrigger = false;
+let newDurat = 0;
 
 function preload() {
 	soundFile = loadSound(
@@ -33,7 +35,7 @@ function setup() {
 	//
 	let button;
 	button = createButton("PLAY");
-	button.id('playBtn')
+	button.id("playBtn");
 	button.mouseClicked(function () {
 		soundFile.play();
 	});
@@ -56,7 +58,9 @@ function setup() {
 	soundFile.addCue(141.6, cuedUp, "cue04");
 	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
-	soundFile.addCue(5, cuedUp, "tempCue");
+	soundFile.addCue(5, cuedUp, "tempCue01");
+	soundFile.addCue(10, cuedUp, "tempCue02");
+	soundFile.addCue(15, cuedUp, "tempCue03");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -74,11 +78,14 @@ cuedUp = (val) => {
 			break;
 		case "cue03":
 			theColor = "#EF2D5E";
+			newRotY = 360;
 			console.log("102.6");
 			break;
 		case "cue03b":
 			theColor = "tomato";
 			console.log("cue03b");
+			newRotY = 360;
+			newDurat = Math.random() * 11600 + 8500;
 			break;
 		case "cue04":
 			theColor = "deepskyblue";
@@ -93,10 +100,23 @@ cuedUp = (val) => {
 			console.log("172.6");
 			break;
 
-		case "tempCue":
+		case "tempCue01":
 			theColor = "deepskyblue";
-			newRotY = 360
-			// console.log("tempCue");
+			newRotY = 360;
+			// newDurat = Math.random() * 11600 + 8500;
+			// console.log("newRotY: " + newRotY);
+			break;
+		case "tempCue02":
+			theColor = "tomato";
+			// newRotY = -360;
+			duratTrigger = true;
+			console.log("duratTrigger: " + duratTrigger);
+			break;
+		case "tempCue03":
+			theColor = "deepskyblue";
+			// newRotY = -360;
+			duratTrigger = false;
+			console.log("duratTrigger: " + duratTrigger);
 			break;
 	}
 };

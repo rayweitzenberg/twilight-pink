@@ -26,12 +26,14 @@ AFRAME.registerComponent("sky-walking", {
 		const sceneEl = document.querySelector("a-scene");
 		
 		this.staticConts = [];
-		// newRotY = 0
 		console.log('newRotY: ' + newRotY)
 		this.oneScaler = 0;
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
 		this.oldColor
+		this.oldRotation
+		this.oldDurat = false
+		this.duratTrigger = false
 		
 		let randDur = Math.random() * 8600 + 6500;
 
@@ -110,7 +112,7 @@ AFRAME.registerComponent("sky-walking", {
 				// to: "0 0 0", // Orbit around Y axis
 				to: {x: 0, y: newRotY, z: 0}, // Orbit around Y axis
 				easing: "linear",
-				dur: randDur, // Random duration of orbit
+				dur: this.data.randDur, // Random duration of orbit
 				loop: true,
 			});
 
@@ -183,6 +185,29 @@ AFRAME.registerComponent("sky-walking", {
 		}
 	},
 
+	// ————————————————————————————————————o Changing Colors on Cues -->
+	// Triggered in tick() below -->
+	//
+	setNewRot: function (newColor) {
+		for (let i = 0; i < this.staticConts.length; i++) {
+			if (this.oldDurat != duratTrigger) {
+				this.theDurat = Math.random() * 8600 + 6500;
+				// duratTrigger = false
+				console.log('this.theDurat true :' + this.theDurat)
+			} else {
+				this.theDurat = 8000
+				console.log('this.theDurat false :' + this.theDurat)
+			}
+			this.staticConts[i].setAttribute("animation", {
+				property: "rotation",
+				to: {x: 0, y: newRotY, z: 0}, // Orbit around Y axis
+				easing: "linear",
+				dur: this.theDurat, // Random duration of orbit
+				loop: true,
+			});
+		}
+	},
+
 	tick: function (time, deltaTime) {
 		// ————————————————————————————————————o Animating scale -->
 		// setDiameter() above -->
@@ -198,6 +223,14 @@ AFRAME.registerComponent("sky-walking", {
 		if (this.oldColor != theColor) {
 			this.setColor(theColor);
 			this.oldColor = theColor;
+		}
+
+		// ————————————————————————————————————o Changing Colors on Cues -->
+		// setColor() above -->
+		//
+		if (this.oldRotation != newRotY) {
+			this.setNewRot(newRotY);
+			this.oldRotation = newRotY;
 		}
 	},
 });
