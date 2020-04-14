@@ -10,7 +10,7 @@ let cuedUp;
 var amplitude;
 var volume;
 var diameter;
-let theColor;
+let theColor = "#EF2D5E";
 var smoothing = 0.01;
 var smoothSlider, smoothLabel;
 
@@ -59,6 +59,7 @@ function setup() {
 	soundFile.addCue(141.6, cuedUp, "cue04");
 	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
+	// soundFile.addCue(5, cuedUp, "tempCue");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -93,6 +94,11 @@ cuedUp = (val) => {
 		case "cue06":
 			theColor = "#EF2D5E";
 			console.log("172.6");
+			break;
+
+		case "tempCue":
+			theColor = "deepskyblue";
+			console.log("tempCue");
 			break;
 	}
 };

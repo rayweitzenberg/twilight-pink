@@ -14,10 +14,8 @@ AFRAME.registerComponent("twilight-pink", {
 		},
 		boxScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
-		sadeScale: { type: "vec3", default: { x: 9, y: 8, z: 8 } },
 		orbitColor: { type: "color", default: "#37428A" },
-		anchColor: { type: "color", default: "#EF2D5E" },
-		theColor: { type: "color", default: "#EF2D5E" },
+		staticColor: { type: "color", default: "#EF2D5E" },
 	},
 
 	init: function () {
@@ -28,6 +26,9 @@ AFRAME.registerComponent("twilight-pink", {
 		const sceneEl = document.querySelector("a-scene");
 		this.oneScaler = 0;
 		this.scalerEls = [];
+		this.tempColor = "#EF2D5E";
+		this.oldDiameter = undefined;
+		this.oldColor = 0;
 
 		let randDur = Math.random() * 8600 + 6500;
 
@@ -101,18 +102,18 @@ AFRAME.registerComponent("twilight-pink", {
 			let starScaleAll = 2;
 			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30);
 
-			// let oneStar;
-			this.oneStar = document.createElement("a-box");
-			this.oneStar.setAttribute("id", "oneStar-" + j);
-			this.oneStar.setAttribute("scale", this.data.starScale);
+			let oneStar = this.oneStar;
+			oneStar = document.createElement("a-box");
+			oneStar.setAttribute("id", "oneStar-" + j);
+			oneStar.setAttribute("scale", this.data.starScale);
 			// this.oneStar.setAttribute("scale", {x: 8, y: 8, z: 8});
-			this.oneStar.setAttribute("material", { color: data.anchColor });
-			this.oneStar.setAttribute("position", {
+			oneStar.setAttribute("material", { color: data.staticColor });
+			oneStar.setAttribute("position", {
 				x: starX,
 				y: starY,
 				z: starZ,
 			});
-			this.oneStar.setAttribute("animation", {
+			oneStar.setAttribute("animation", {
 				property: "rotation",
 				from: "180 180 180",
 				to: "360 360 360",
@@ -121,8 +122,12 @@ AFRAME.registerComponent("twilight-pink", {
 				loop: true,
 			});
 
-			this.scalerEls.push(this.oneStar);
-			sceneEl.appendChild(this.oneStar);
+			oneStar.eventHandlerFn = function () {
+				console.log(self.data.tmpColor);
+			};
+
+			this.scalerEls.push(oneStar);
+			sceneEl.appendChild(oneStar);
 		}
 	},
 
@@ -134,25 +139,45 @@ AFRAME.registerComponent("twilight-pink", {
 		);
 	},
 
-	tick: function (time, deltaTime) {
-		// ————————————————————————————————————o Animating scale -->
-		// Animating scale based on sound volume -->
-		//
+	// ————————————————————————————————————o Animating scale -->
+	// Animating scale based on sound volume -->
+	//
+	setDiameter: function (diameter) {
 		for (let i = 0; i < this.scalerEls.length; i++) {
-			let theScale = this.scalerEls[i].getAttribute("scale");
 			// console.log('diameter: ' + diameter)
 			let mapScale = this.scaler(diameter, 37, 160, 3, 5);
-			theScale.x = mapScale;
-			theScale.y = mapScale;
-			theScale.z = mapScale;
-			this.scalerEls[i].setAttribute("scale", theScale);
-			// console.log('theScale: ' + theScale.x)
+			this.scalerEls[i].setAttribute("scale", {
+				x: mapScale,
+				y: mapScale,
+				z: mapScale,
+			});
+		}
+	},
 
+	// ————————————————————————————————————o Changing Colors on Cues -->
+	// Triggered in tick() below -->
+	//
+	setColor: function (newColor) {
+		for (let i = 0; i < this.scalerEls.length; i++) {
+			this.scalerEls[i].setAttribute("material", { color: newColor });
+		}
+	},
 
-			// ————————————————————————————————————o Changing Colors on Cues -->
-			// Changing Colors on Cues -->
-			//
-			this.scalerEls[i].setAttribute("material", { color: theColor });
+	tick: function (time, deltaTime) {
+		// ————————————————————————————————————o Animating scale -->
+		// setDiameter() above -->
+		//
+		if (this.oldDiameter != diameter || this.oldDiameter != 25) {
+			this.setDiameter(diameter);
+			this.oldDiameter = diameter;
+		}
+
+		// ————————————————————————————————————o Changing Colors on Cues -->
+		// setColor() above -->
+		//
+		if (this.oldColor != theColor) {
+			this.setColor(theColor);
+			this.oldColor = theColor;
 		}
 	},
 });
