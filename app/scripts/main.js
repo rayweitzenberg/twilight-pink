@@ -26,10 +26,9 @@ AFRAME.registerComponent("sky-walking", {
 		const sceneEl = document.querySelector("a-scene");
 		this.oneScaler = 0;
 		this.scalerEls = [];
-		this.tempColor = "#EF2D5E";
 		this.oldDiameter = undefined;
-		this.oldColor = 0;
-
+		this.oldColor
+		
 		let randDur = Math.random() * 8600 + 6500;
 
 		// ————————————————————————————————————o Trigger Audio Play -->
@@ -42,7 +41,6 @@ AFRAME.registerComponent("sky-walking", {
 		sceneEl.addEventListener("enter-vr", function () {
 			soundFile.play();
 		});
-		// sceneEl.setAttribute("fog", { type: linear });
 
 		// ————————————————————————————————————o————————————————————————————————————o Cubing -->
 		// Cubing -->
@@ -67,9 +65,9 @@ AFRAME.registerComponent("sky-walking", {
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
-			let boxX = Math.floor(Math.random() * Math.floor(27) - 25);
+			let boxX = Math.floor(Math.random() * Math.floor(50) + 10);
 			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20);
-			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 20);
+			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 5);
 
 			let boxer = document.createElement("a-box");
 			boxer.setAttribute("id", "boxer-" + i);
