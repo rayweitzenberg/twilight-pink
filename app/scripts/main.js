@@ -24,10 +24,15 @@ AFRAME.registerComponent("sky-walking", {
 		let data = this.data;
 
 		const sceneEl = document.querySelector("a-scene");
+		
+		this.staticConts = [];
+		// newRotY = 0
+		console.log('newRotY: ' + newRotY)
 		this.oneScaler = 0;
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
 		this.oldColor
+		
 		let randDur = Math.random() * 8600 + 6500;
 
 		// ————————————————————————————————————o Trigger Audio Play -->
@@ -97,11 +102,13 @@ AFRAME.registerComponent("sky-walking", {
 			// ————————————————————————————————————o Need staticHldr to enable orbting -->
 			// Need staticHldr to enable orbting animation -->
 			//
-			let staticHldr = document.createElement("a-entity");
+			let staticHldr = this.staticHldr
+			staticHldr = document.createElement("a-entity");
 			staticHldr.setAttribute("id", "staticHldr-" + j);
 			staticHldr.setAttribute("animation", {
 				property: "rotation",
-				to: "0 360 0", // Orbit around Y axis
+				// to: "0 0 0", // Orbit around Y axis
+				to: {x: 0, y: newRotY, z: 0}, // Orbit around Y axis
 				easing: "linear",
 				dur: randDur, // Random duration of orbit
 				loop: true,
@@ -137,6 +144,7 @@ AFRAME.registerComponent("sky-walking", {
 				console.log(self.data.tmpColor);
 			};
 
+			this.staticConts.push(staticHldr);
 			this.scalerEls.push(oneStatic);
 			sceneEl.appendChild(staticHldr);
 			staticHldr.appendChild(oneStatic)

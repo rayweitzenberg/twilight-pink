@@ -13,6 +13,7 @@ var diameter;
 let theColor = "#EF2D5E";
 var smoothing = 0.01;
 var smoothSlider, smoothLabel;
+let newRotY = 0
 
 function preload() {
 	soundFile = loadSound(
@@ -55,7 +56,7 @@ function setup() {
 	soundFile.addCue(141.6, cuedUp, "cue04");
 	soundFile.addCue(157.4, cuedUp, "cue05");
 	soundFile.addCue(172.6, cuedUp, "cue06");
-	// soundFile.addCue(5, cuedUp, "tempCue");
+	soundFile.addCue(5, cuedUp, "tempCue");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -94,7 +95,8 @@ cuedUp = (val) => {
 
 		case "tempCue":
 			theColor = "deepskyblue";
-			console.log("tempCue");
+			newRotY = 360
+			// console.log("tempCue");
 			break;
 	}
 };
