@@ -42,6 +42,7 @@ AFRAME.registerComponent("twilight-pink", {
 		sceneEl.addEventListener("enter-vr", function () {
 			soundFile.play();
 		});
+		// sceneEl.setAttribute("fog", { type: linear });
 
 		// ————————————————————————————————————o————————————————————————————————————o Cubing -->
 		// Cubing -->
@@ -66,7 +67,7 @@ AFRAME.registerComponent("twilight-pink", {
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
-			let boxX = Math.floor(Math.random() * Math.floor(27) - 5);
+			let boxX = Math.floor(Math.random() * Math.floor(27) - 25);
 			let boxY = Math.floor(Math.random() * Math.floor(-30) + 20);
 			let boxZ = Math.floor(Math.random() * Math.floor(-30) - 20);
 
