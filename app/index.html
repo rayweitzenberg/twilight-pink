@@ -19,13 +19,21 @@
 		<script src="scripts/audio-reactor.js"></script>
 		<script src="scripts/main.js"></script>
 
-		<a class="glitchRemix" href="https://glitch.com/edit/#!/remix/pink-cubin"
+		<div id="loadingMsg">
+			<h1>Sky Walking</h1>
+			<h2>(working title)</h2>
+			<p>This is a WebXR app made using A-Frame and p5.js</p>
+			<p>Pan/look around in all directions.</p>
+			<p>Hit the "Play" button below to get the audio and audio reactivity going. <br>Hit the "VR" button to enter in a headset.</p>
+		</div>
+
+		<a class="glitchRemix" href="https://glitch.com/edit/#!/remix/sky-walking"
 			><img
 				src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg"
 				alt="Remix on Glitch"
 		/></a>
 
-		<a-scene sky-walking fog="type: linear; far: 70; near: 0"  wasd-controls="acceleration: 800; fly: true">
+		<a-scene sky-walking id="theScene" fog="type: linear; far: 70; near: 0"  wasd-controls="acceleration: 800; fly: true">
 			<a-entity oculus-touch-controls="hand: right"></a-entity>
 			<a-entity light="type: ambient; color: #5667D5"> </a-entity>
 			<a-entity light="type: point; intensity: 2"></a-entity>

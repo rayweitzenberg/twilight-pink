@@ -36,20 +36,18 @@ function setup() {
 			soundFile.stop()
 			button.html("PLAY")
 			theColor = "#EF2D5E";
-			console.log('stop')
 		} else {
 			soundFile.play()
 			button.html("STOP")
-			console.log('play')
 		}
 	});
 
 	cnv.html(text, true);
 
 	// create a new p5.Amplitude. Optionally, give it a 'smoothing' value betw 0.0 and .999
-	amplitude = new p5.Amplitude(smoothing);
+	amplitude = new p5.Amplitude();
 
-	smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
+	// smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
 	// smoothLabel = createP("Smoothing: " + smoothing);
 
 	// ————————————————————————————————————o Audio Cues -->
@@ -140,11 +138,10 @@ function draw() {
 
 	// Change size based on volume. First, map to useful values.
 	diameter = map(volume, 0, 1.0, 25, 400);
-	// ellipse(width / 2, height / 2, diameter, diameter);
 
 	// // change smoothing
 	// smoothing = smoothSlider.value() / 100;
-	// // smoothLabel.html("Smoothing: " + smoothing);
+	// smoothLabel.html("Smoothing: " + smoothing);
 	// amplitude.smooth(smoothing);
 }
 

@@ -194,15 +194,14 @@ AFRAME.registerComponent("sky-walking", {
 	// Triggered in tick() below -->
 	//
 	setNewRot: function (changeRot) {
-
-		let changingRot = this.data.countingRot.y
+		let changingRot = this.data.countingRot.y;
 		// console.log('changingRot: ' + changingRot)
 
 		// ——————————————————o Set Direction of Orbit -->
 		if (directionRot) {
-			changingRot = 0
+			changingRot = 0;
 		} else {
-			changingRot = 360
+			changingRot = 360;
 		}
 
 		for (let i = 0; i < this.staticConts.length; i++) {
@@ -244,6 +243,25 @@ AFRAME.registerComponent("sky-walking", {
 		this.setNewRot();
 	},
 });
+
+function loadScene() {
+	if (document.getElementById("defaultCanvas0")) {
+		let theScene = document.getElementById("theScene");
+		theScene.classList.add("loaded");
+
+		let fadeMsg = document.getElementById("loadingMsg");
+		fadeMsg.onclick = () => {
+			fadeMsg.classList.add("fadeOut");
+			document.body.classList.add("unfade");
+			setTimeout(function () {
+				fadeMsg.style.display = "none";
+			}, 1000);
+		};
+	} else {
+		setTimeout(loadScene, 90);
+	}
+}
+loadScene();
 
 // https://localhost:9000
 // https://aframe.io/docs/1.0.0/introduction/best-practices.html
