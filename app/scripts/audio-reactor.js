@@ -25,11 +25,6 @@ function preload() {
 
 function setup() {
 	cnv = createCanvas(100, 100);
-
-	cnv.mouseClicked(function () {
-		soundFile.play();
-	});
-
 	// ————————————————————————————————————o Play Button -->
 	// Play Button -->
 	//
@@ -37,7 +32,16 @@ function setup() {
 	button = createButton("PLAY");
 	button.id("playBtn");
 	button.mouseClicked(function () {
-		soundFile.play();
+		if (soundFile.isPlaying()) {
+			soundFile.stop()
+			button.html("PLAY")
+			theColor = "#EF2D5E";
+			console.log('stop')
+		} else {
+			soundFile.play()
+			button.html("STOP")
+			console.log('play')
+		}
 	});
 
 	cnv.html(text, true);
@@ -101,6 +105,8 @@ cuedUp = (val) => {
 			break;
 		case "cue06":
 			theColor = "#EF2D5E";
+			directionRot = false; // ——————————————————o Rotation -->
+			console.log("directionRot: " + directionRot);
 			newDurat = Math.random() * 11600 + 8500;
 			console.log("cue06: #EF2D5");
 			break;
