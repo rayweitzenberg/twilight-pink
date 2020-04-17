@@ -82,7 +82,11 @@ a-scene {
     font-weight: 300;
     letter-spacing: 1.5px;
 		line-height: 1.7;
-	}
+  }
+  
+  span {
+    border-bottom: 1px solid #dadada;
+  }
 
 	button {
     width: 150px;
