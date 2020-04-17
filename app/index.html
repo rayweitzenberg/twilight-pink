@@ -13,21 +13,33 @@
 		<!-- endbuild -->
 	</head>
 	<body>
-		<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
 		<script src="scripts/p5.sound.js"></script>
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
 		<script src="scripts/audio-reactor.js"></script>
 		<script src="scripts/main.js"></script>
 
-		<div id="loadingMsg">
-			<h1>Sky Walking</h1>
-			<p>This is a WebXR app made using A-Frame and p5.js</p>
-			<p>Pan/Look around in all directions.</p>
-			<p>The "Play" button on the next screen gets audio reactivity going. On iOS you'll need to <span>turn off silent mode</span>.</p>
-			<p>Hit the "VR" button to enter in a headset.</p>
-			<button class="transp-bg">enter</button>
+		<div id="splashPg">
+			<div class="splashInner">
+				<h1>Sky Walking</h1>
+				<p>On iOS <span>turn off silent mode</span>.</p>
+				<p>Hit 'Play' for audio reactivity.</p>
+				<p>You can pan/look around in all directions.</p>
+				<p>Hit 'VR' to enter <nobr>in a headset.</nobr></p>
+				<button class="transp-bg loading"><span class="blinkDot">loading</span></button>
+				<button class="transp-bg enter">enter</button>
+			</div>
 		</div>
+
+		<!-- <div id="splashPg">
+			<h1>Sky Walking</h1>
+			<p>This is a WebXR app made using <nobr>A-Frame</nobr> and p5.js</p>
+			<p>The 'Play' button on the next screen starts audio reactivity. <br>On iOS <span>turn off silent mode</span>.</p>
+			<p>Hit the 'VR' button to enter <nobr>in a headset.</nobr></p>
+			<p>'VR' button to enter <nobr>in a headset.</nobr></p>
+			<button class="transp-bg">enter</button>
+		</div> -->
 
 		<a class="glitchRemix" href="https://glitch.com/edit/#!/remix/sky-walking"
 			><img

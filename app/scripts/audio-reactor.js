@@ -4,40 +4,39 @@
  */
 
 let cnv;
-var soundFile;
+var royksopp;
 let addCue;
 let cuedUp;
 var amplitude;
 var volume;
 var diameter;
 let theColor = "#EF2D5E";
-var smoothing = 0.01;
-var smoothSlider, smoothLabel;
 let newRotY = 0;
-let directionRot = true
+let directionRot = true;
 let newDurat = 0;
 
 function preload() {
-	soundFile = loadSound(
+	royksopp = loadSound(
 		"https://cdn.glitch.com/f5e18228-4ad6-44e5-8691-28fc5f4b1dc6%2Froyksopp.mp3?v=1586317404647"
 	);
 }
 
 function setup() {
 	cnv = createCanvas(100, 100);
+
 	// ————————————————————————————————————o Play Button -->
 	// Play Button -->
 	//
 	let playSound = () => {
-		if (soundFile.isPlaying()) {
-			soundFile.stop()
-			button.html("PLAY")
+		if (royksopp.isPlaying()) {
+			royksopp.stop();
+			button.html("PLAY");
 			theColor = "#EF2D5E";
 		} else {
-			soundFile.play()
-			button.html("STOP")
+			royksopp.play();
+			button.html("STOP");
 		}
-	}
+	};
 
 	let button;
 	button = createButton("PLAY");
@@ -46,26 +45,22 @@ function setup() {
 
 	cnv.html(text, true);
 
-	// create a new p5.Amplitude. Optionally, give it a 'smoothing' value betw 0.0 and .999
 	amplitude = new p5.Amplitude();
-
-	// smoothSlider = createSlider(0.0, 99.9, smoothing * 100);
-	// smoothLabel = createP("Smoothing: " + smoothing);
 
 	// ————————————————————————————————————o Audio Cues -->
 	// Audio Cues -->
 	//
-	soundFile.addCue(47.7, cuedUp, "cue01");
-	soundFile.addCue(63.2, cuedUp, "cue02");
-	soundFile.addCue(102.6, cuedUp, "cue03");
-	soundFile.addCue(110.2, cuedUp, "cue03b");
-	soundFile.addCue(141.6, cuedUp, "cue04");
-	soundFile.addCue(157.4, cuedUp, "cue05");
-	soundFile.addCue(172.6, cuedUp, "cue06");
-	
-	// soundFile.addCue(5, cuedUp, "tempCue01");
-	// soundFile.addCue(15, cuedUp, "tempCue02");
-	// soundFile.addCue(25, cuedUp, "tempCue03");
+	royksopp.addCue(47.7, cuedUp, "cue01");
+	royksopp.addCue(63.2, cuedUp, "cue02");
+	royksopp.addCue(102.6, cuedUp, "cue03");
+	royksopp.addCue(110.2, cuedUp, "cue03b");
+	royksopp.addCue(141.6, cuedUp, "cue04");
+	royksopp.addCue(157.4, cuedUp, "cue05");
+	royksopp.addCue(172.6, cuedUp, "cue06");
+
+	// royksopp.addCue(5, cuedUp, "tempCue01");
+	// royksopp.addCue(15, cuedUp, "tempCue02");
+	// royksopp.addCue(25, cuedUp, "tempCue03");
 }
 
 // ————————————————————————————————————o Audio Cue Logic -->
@@ -133,22 +128,9 @@ cuedUp = (val) => {
 };
 
 function draw() {
-	// background(50);
-
 	// get volume from the amplitude process
 	volume = amplitude.getLevel();
 
 	// Change size based on volume. First, map to useful values.
 	diameter = map(volume, 0, 1.0, 25, 400);
-
-	// // change smoothing
-	// smoothing = smoothSlider.value() / 100;
-	// smoothLabel.html("Smoothing: " + smoothing);
-	// amplitude.smooth(smoothing);
 }
-
-// 	// 'n' keypress toggles normalize on/off
-// 	if (e.keyCode == 78) {
-// 		amplitude.toggleNormalize();
-// 	}
-// }

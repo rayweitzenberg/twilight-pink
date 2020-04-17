@@ -36,7 +36,7 @@ a-scene {
 	left: 0;
 }
 
-#loadingMsg {
+#splashPg {
 	z-index: 1;
 	display: flex;
 	flex-direction: column;
@@ -61,22 +61,25 @@ a-scene {
 		}
 	}
 
-	* {
-    width: 89%;
-    max-width: 600px;
-		opacity: 1;
-		transition: opacity 1s;
-  }
-  
-  @media (min-width: 1025px) {
-    * {
-      width: 57%;
-    }
-  }
+	.splashInner {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		position: relative;
+		width: 100%;
+		max-width: 600px;
+		height: 290px;
+	}
+
+	@media (min-width: 1025px) {
+	}
 
 	h1 {
-    margin: 0;
-    padding-bottom: 20px;
+		width: 100%;
+		margin: 0;
+		padding-bottom: 20px;
+		text-align: center;
 	}
 
 	h2 {
@@ -84,35 +87,65 @@ a-scene {
 	}
 
 	p {
-		margin: 10px auto 5px;
+		margin: 5px auto;
 		font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 1.5px;
+		font-weight: 300;
+		letter-spacing: 1.5px;
 		line-height: 1.7;
-  }
-  
-  span {
-    border-bottom: 1px solid #dadada;
-  }
+
+		& span {
+			border-bottom: 1px solid #dadada;
+		}
+	}
 
 	button {
-    width: 150px;
-		margin: 25px auto 0;
+		position: absolute;
+		bottom: 0;
+		width: 150px;
+		height: 42px;
+		margin: 20px auto 0;
 		padding: 10px 20px 12px;
 		font-size: 16px;
 		color: white;
 		letter-spacing: 1.5px;
 		font-weight: 300;
+		border: 1px solid transparent;
 		background-color: transparent;
-		border: 1px solid white;
 		transition: all 0.4s;
+		opacity: 1;
+		transition: opacity 1s;
+
+		&.enter {
+			opacity: 0;
+			border: 1px solid white;
+		}
 
 		&:hover {
 			color: black;
-      background-color: white;
-      transition: all 0.4s;
-      cursor: pointer;
+			background-color: white;
+			transition: all 0.4s;
+			cursor: pointer;
 		}
+
+		&.unfade {
+			opacity: 1;
+			border: 1px solid white;
+			transition: all 1s;
+		}
+	}
+}
+.blinkDot {
+	animation: 1.4s blinker linear infinite;
+}
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
 

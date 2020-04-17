@@ -250,7 +250,15 @@ function loadScene() {
 		let theScene = document.getElementById("theScene");
 		theScene.classList.add("loaded");
 
-		let fadeMsg = document.getElementById("loadingMsg");
+		// Animate Button Text as Progress Indicator
+		//
+		$(".loading").animate({ opacity: "0" }, 100, function () {
+			$(".enter").animate({ opacity: "1" }, 500);
+		});
+
+		// Fade out Splash Page
+		//
+		let fadeMsg = document.getElementById("splashPg");
 		fadeMsg.onclick = () => {
 			fadeMsg.classList.add("fadeOut");
 			document.body.classList.add("unfade");
@@ -266,20 +274,17 @@ loadScene();
 
 // ————————————————————————————————————o Set Loading Screen Height -->
 // Set Loading Screen Height -->
-// This is done to account for the space stolen on mobile browsers
-// 
-// Worked to do this without jquery
+// Accounts for the space stolen on mobile browsers
 //
 function setLoadingHt() {
-	if (document.getElementById('loadingMsg')) {
-		document.getElementById('loadingMsg').style.height = window.innerHeight + "px"
+	if (document.getElementById("splashPg")) {
+		document.getElementById("splashPg").style.height =
+			window.innerHeight + "px";
 	} else {
 		setTimeout(setLoadingHt, 90);
 	}
 }
-setLoadingHt()
-
-
+setLoadingHt();
 
 // https://localhost:9000
 // https://aframe.io/docs/1.0.0/introduction/best-practices.html
