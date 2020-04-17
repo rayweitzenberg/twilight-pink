@@ -86,8 +86,8 @@ a-scene {
 
 	button {
     width: 150px;
-		margin: 30px auto 0;
-		padding: 10px 20px;
+		margin: 25px auto 0;
+		padding: 10px 20px 12px;
 		font-size: 16px;
 		color: white;
 		letter-spacing: 1.5px;
@@ -97,19 +97,10 @@ a-scene {
 		transition: all 0.4s;
 
 		&:hover {
-			color: transparent;
+			color: black;
       background-color: white;
+      transition: all 0.4s;
       cursor: pointer;
-		}
-
-		&.transp-bg {
-			color: white;
-			background-color: transparent;
-			transition: all 0.4s;
-			&:hover {
-				color: black;
-				background-color: white;
-			}
 		}
 	}
 }
