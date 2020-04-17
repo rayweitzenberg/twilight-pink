@@ -244,6 +244,9 @@ AFRAME.registerComponent("sky-walking", {
 	},
 });
 
+// ————————————————————————————————————o Loading Screen Functionality -->
+// Loading Screen Functionality -->
+//
 function loadScene() {
 	if (document.getElementById("defaultCanvas0")) {
 		let theScene = document.getElementById("theScene");
@@ -262,6 +265,23 @@ function loadScene() {
 	}
 }
 loadScene();
+
+// ————————————————————————————————————o Set Loading Screen Height -->
+// Set Loading Screen Height -->
+// This is done to account for the space stolen on mobile browsers
+// 
+// Worked to do this without jquery
+//
+function setLoadingHt() {
+	if (document.getElementById('loadingMsg')) {
+		document.getElementById('loadingMsg').style.height = window.innerHeight + "px"
+	} else {
+		setTimeout(setLoadingHt, 90);
+	}
+}
+setLoadingHt()
+
+
 
 // https://localhost:9000
 // https://aframe.io/docs/1.0.0/introduction/best-practices.html

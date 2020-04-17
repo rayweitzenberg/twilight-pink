@@ -28,10 +28,7 @@ function setup() {
 	// ————————————————————————————————————o Play Button -->
 	// Play Button -->
 	//
-	let button;
-	button = createButton("PLAY");
-	button.id("playBtn");
-	button.mouseClicked(function () {
+	let playSound = () => {
 		if (soundFile.isPlaying()) {
 			soundFile.stop()
 			button.html("PLAY")
@@ -40,7 +37,12 @@ function setup() {
 			soundFile.play()
 			button.html("STOP")
 		}
-	});
+	}
+
+	let button;
+	button = createButton("PLAY");
+	button.id("playBtn");
+	button.mouseClicked(playSound);
 
 	cnv.html(text, true);
 
