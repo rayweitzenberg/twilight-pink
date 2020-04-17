@@ -124,8 +124,6 @@ AFRAME.registerComponent("sky-walking", {
 			let starX = Math.floor(Math.random() * (30 + 60) - 40);
 			let starY = Math.floor(Math.random() * (30 + 60) - 40);
 			let starZ = Math.floor(Math.random() * (30 + 60) - 40);
-			let starScaleAll = 2;
-			let starPos = Math.floor(Math.random() * Math.floor(-60) + 30);
 
 			let oneStatic = this.oneStatic;
 			oneStatic = document.createElement("a-box");
