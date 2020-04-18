@@ -12,9 +12,9 @@ AFRAME.registerComponent("sky-walking", {
 			type: "int",
 			default: Math.floor(Math.random() * 8600 + 6500),
 		},
-		orbiterScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
+		minorityScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
-		orbitColor: { type: "color", default: "#37428A" },
+		minorityColor: { type: "color", default: "#37428A" },
 		staticColor: { type: "color", default: "#EF2D5E" },
 		grandTotalRot: { type: "int", default: 0 },
 		countingRot: { type: "vec3", default: { x: 0, y: 0, z: 0 } },
@@ -27,6 +27,7 @@ AFRAME.registerComponent("sky-walking", {
 
 		const sceneEl = document.querySelector("a-scene");
 
+		this.minorityConts = [];
 		this.staticConts = [];
 		this.oneScaler = 0;
 		this.scalerEls = [];
@@ -56,12 +57,12 @@ AFRAME.registerComponent("sky-walking", {
 		for (let i = 0; i < 20; i++) {
 			let randDur = Math.random() * 8600 + 6500;
 
-			// ————————————————————————————————————o Need orbiterHldr to enable orbting -->
-			// Need orbiterHldr to enable orbting animation -->
+			// ————————————————————————————————————o Need minorityHldr to enable orbting -->
+			// Need minorityHldr to enable orbting animation -->
 			//
-			let orbiterHldr = document.createElement("a-entity");
-			orbiterHldr.setAttribute("id", "orbiterHldr-" + i);
-			orbiterHldr.setAttribute("animation", {
+			let minorityHldr = document.createElement("a-entity");
+			minorityHldr.setAttribute("id", "minorityHldr-" + i);
+			minorityHldr.setAttribute("animation", {
 				property: "rotation",
 				to: "0 360 0", // Orbit around Y axis
 				easing: "linear",
@@ -69,23 +70,31 @@ AFRAME.registerComponent("sky-walking", {
 				loop: true,
 			});
 
+			// minorityHldr.object3D.rotation.set(
+			// 	THREE.Math.degToRad(0),
+			// 	THREE.Math.degToRad(0),
+			// 	THREE.Math.degToRad(0)
+			// );
+
+			// el.object3D.rotation.x += Math.PI;
+
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
 			//
-			let orbiterX = Math.floor(Math.random() * Math.floor(-30) + 30);
-			let orbiterY = Math.floor(Math.random() * Math.floor(-50) + 30);
-			let orbiterZ = Math.floor(Math.random() * Math.floor(-15) - 15);
+			let minorityX = Math.floor(Math.random() * Math.floor(-30) + 30);
+			let minorityY = Math.floor(Math.random() * Math.floor(-50) + 30);
+			let minorityZ = Math.floor(Math.random() * Math.floor(-15) - 15);
 
-			let orbiter = document.createElement("a-box");
-			orbiter.setAttribute("id", "orbiter-" + i);
-			orbiter.setAttribute("scale", data.orbiterScale);
-			orbiter.setAttribute("material", { color: data.orbitColor });
-			orbiter.setAttribute("position", {
-				x: orbiterX,
-				y: orbiterY,
-				z: orbiterZ,
+			let minority = document.createElement("a-box");
+			minority.setAttribute("id", "minority-" + i);
+			minority.setAttribute("scale", data.minorityScale);
+			minority.setAttribute("material", { color: data.minorityColor });
+			minority.setAttribute("position", {
+				x: minorityX,
+				y: minorityY,
+				z: minorityZ,
 			});
-			orbiter.setAttribute("animation", {
+			minority.setAttribute("animation", {
 				property: "rotation",
 				to: "360 360 360",
 				easing: "linear",
@@ -93,26 +102,27 @@ AFRAME.registerComponent("sky-walking", {
 				loop: true,
 			});
 
-			sceneEl.appendChild(orbiterHldr);
-			orbiterHldr.appendChild(orbiter); // Put orbiter in a parent container to achieve orbital rotation
+			// this.minorityConts.push(minorityHldr)
+			sceneEl.appendChild(minorityHldr);
+			minorityHldr.appendChild(minority); // Put minority in a parent container to achieve orbital rotation
 
 			// I can't kick this feelin when it hits
 		}
 
-		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids -->
-		// Anchored Asteroids -->
-		// ————————————————————————————————————o————————————————————————————————————o Anchored Asteroids —>
+		// ————————————————————————————————————o————————————————————————————————————o Majority Cubes -->
+		// Majority Cubes -->
+		// ————————————————————————————————————o————————————————————————————————————o Majority Cubes —>
 		//
 		for (let j = 0; j < 200; j++) {
 			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
 
-			// ————————————————————————————————————o Need staticHldr to enable orbting -->
-			// Need staticHldr to enable orbting animation -->
+			// ————————————————————————————————————o Need majorHldr to enable orbting -->
+			// Need majorHldr to enable orbting animation -->
 			//
-			let staticHldr = this.staticHldr;
-			staticHldr = document.createElement("a-entity");
-			staticHldr.setAttribute("id", "staticHldr-" + j);
-			staticHldr.setAttribute("animation", {
+			let majorHldr = this.majorHldr;
+			majorHldr = document.createElement("a-entity");
+			majorHldr.setAttribute("id", "majorHldr-" + j);
+			majorHldr.setAttribute("animation", {
 				property: "rotation",
 				// to: "0 0 0", // Orbit around Y axis
 				to: { x: 0, y: newRotY, z: 0 }, // Orbit around Y axis
@@ -136,23 +146,29 @@ AFRAME.registerComponent("sky-walking", {
 				y: starY,
 				z: starZ,
 			});
-			oneStatic.setAttribute("animation", {
-				property: "rotation",
-				from: "180 180 180",
-				to: "360 360 360",
-				easing: "linear",
-				dur: randDur,
-				loop: true,
-			});
+			// oneStatic.setAttribute("animation", {
+			// 	property: "rotation",
+			// 	from: "180 180 180",
+			// 	to: "360 360 360",
+			// 	easing: "linear",
+			// 	dur: randDur,
+			// 	loop: true,
+			// });
+
+			oneStatic.object3D.rotation.set(
+				THREE.Math.degToRad(0),
+				THREE.Math.degToRad(360),
+				THREE.Math.degToRad(0)
+			);
 
 			oneStatic.eventHandlerFn = function () {
 				console.log(self.data.tmpColor);
 			};
 
-			this.staticConts.push(staticHldr);
+			this.staticConts.push(majorHldr);
 			this.scalerEls.push(oneStatic);
-			sceneEl.appendChild(staticHldr);
-			staticHldr.appendChild(oneStatic);
+			sceneEl.appendChild(majorHldr);
+			majorHldr.appendChild(oneStatic);
 		}
 	},
 
@@ -188,37 +204,41 @@ AFRAME.registerComponent("sky-walking", {
 		}
 	},
 
-	// ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
-	// Triggered in tick() below -->
-	//
-	setNewRot: function (changeRot) {
-		let changingRot = this.data.countingRot.y;
-		// console.log('changingRot: ' + changingRot)
+	// // ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
+	// // Triggered in tick() below -->
+	// //
+	// setNewRot: function (changeRot) {
+	// 	let changingRot = this.data.countingRot.y;
+	// 	// console.log('changingRot: ' + changingRot)
 
-		// ——————————————————o Set Direction of Orbit -->
-		if (directionRot) {
-			changingRot = 0;
-		} else {
-			changingRot = 360;
-		}
+	// 	// ——————————————————o Set Direction of Orbit -->
+	// 	if (directionRot) {
+	// 		changingRot = 0;
+	// 	} else {
+	// 		changingRot = 360;
+	// 	}
 
-		for (let i = 0; i < this.staticConts.length; i++) {
-			this.staticConts[i].setAttribute("animation", {
-				property: "rotation",
-				// to: "0 360 0",
-				to: {
-					x: this.data.countingRot.x,
-					y: changingRot,
-					z: this.data.countingRot.z,
-				},
-				easing: "linear",
-				dur: 12000,
-				loop: true,
-			});
-		}
-	},
+	// 	for (let i = 0; i < this.staticConts.length; i++) {
+	// 		this.staticConts[i].setAttribute("animation", {
+	// 			property: "rotation",
+	// 			// to: "0 360 0",
+	// 			to: {
+	// 				x: this.data.countingRot.x,
+	// 				y: changingRot,
+	// 				z: this.data.countingRot.z,
+	// 			},
+	// 			easing: "linear",
+	// 			dur: 12000,
+	// 			loop: true,
+	// 		});
+	// 	}
+	// },
 
 	tick: function (time, deltaTime) {
+		for (let i = 0; i < this.staticConts.length; i++) {
+			this.staticConts[i].object3D.rotation.y += 0.01;
+		}
+
 		// ————————————————————————————————————o Animating scale -->
 		// setDiameter() above -->
 		//
@@ -238,7 +258,7 @@ AFRAME.registerComponent("sky-walking", {
 		// ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
 		// setNewRot() above -->
 		//
-		this.setNewRot();
+		// this.setNewRot();
 	},
 });
 
