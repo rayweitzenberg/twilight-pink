@@ -28,7 +28,7 @@ AFRAME.registerComponent("sky-walking", {
 		const sceneEl = document.querySelector("a-scene");
 
 		this.minorityConts = [];
-		this.staticConts = [];
+		this.majorityConts = [];
 		this.oneScaler = 0;
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
@@ -165,7 +165,7 @@ AFRAME.registerComponent("sky-walking", {
 				console.log(self.data.tmpColor);
 			};
 
-			this.staticConts.push(majorHldr);
+			this.majorityConts.push(majorHldr);
 			this.scalerEls.push(oneStatic);
 			sceneEl.appendChild(majorHldr);
 			majorHldr.appendChild(oneStatic);
@@ -218,8 +218,8 @@ AFRAME.registerComponent("sky-walking", {
 	// 		changingRot = 360;
 	// 	}
 
-	// 	for (let i = 0; i < this.staticConts.length; i++) {
-	// 		this.staticConts[i].setAttribute("animation", {
+	// 	for (let i = 0; i < this.majorityConts.length; i++) {
+	// 		this.majorityConts[i].setAttribute("animation", {
 	// 			property: "rotation",
 	// 			// to: "0 360 0",
 	// 			to: {
@@ -235,8 +235,8 @@ AFRAME.registerComponent("sky-walking", {
 	// },
 
 	tick: function (time, deltaTime) {
-		for (let i = 0; i < this.staticConts.length; i++) {
-			this.staticConts[i].object3D.rotation.y += 0.01;
+		for (let i = 0; i < this.majorityConts.length; i++) {
+			this.majorityConts[i].object3D.rotation.y += 0.01;
 		}
 
 		// ————————————————————————————————————o Animating scale -->
