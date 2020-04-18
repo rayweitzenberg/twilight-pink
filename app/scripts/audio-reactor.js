@@ -12,7 +12,7 @@ var volume;
 var diameter;
 let theColor = "#EF2D5E";
 let newRotY = 0;
-let directionRot = true;
+let directionRot = 0
 let newDurat = 0;
 
 function preload() {
@@ -32,11 +32,19 @@ function setup() {
 			royksopp.stop();
 			button.html("PLAY");
 			theColor = "#EF2D5E";
+			directionRot = 0;
 		} else {
 			royksopp.play();
 			button.html("STOP");
 		}
 	};
+
+	// masterVolume(0.02)
+
+	royksopp.onended(function() {
+		directionRot = 0
+		button.html("PLAY");
+	})
 
 	let button;
 	button = createButton("PLAY");
@@ -82,25 +90,25 @@ cuedUp = (val) => {
 			break;
 		case "cue03b":
 			theColor = "tomato";
-			directionRot = false; // ——————————————————o Rotation -->
+			directionRot = 1; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			console.log("cue03b: tomato");
 			break;
 		case "cue04":
 			theColor = "deepskyblue";
-			directionRot = true; // ——————————————————o Rotation -->
+			directionRot = 0; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			console.log("cue04: deepskyblue");
 			break;
 		case "cue05":
 			theColor = "tomato";
-			directionRot = false; // ——————————————————o Rotation -->
+			directionRot = 1; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			console.log("cue05: tomato");
 			break;
 		case "cue06":
 			theColor = "#EF2D5E";
-			directionRot = false; // ——————————————————o Rotation -->
+			directionRot = 1; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			newDurat = Math.random() * 11600 + 8500;
 			console.log("cue06: #EF2D5");
@@ -111,17 +119,17 @@ cuedUp = (val) => {
 		//
 		case "tempCue01":
 			theColor = "deepskyblue";
-			directionRot = false; // ——————————————————o Rotation -->
+			directionRot = 1; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			break;
 		case "tempCue02":
 			theColor = "tomato";
-			directionRot = true; // ——————————————————o Rotation -->
+			directionRot = 0; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			break;
 		case "tempCue03":
 			theColor = "deepskyblue";
-			directionRot = false; // ——————————————————o Rotation -->
+			directionRot = 3; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			break;
 	}

@@ -15,39 +15,27 @@ AFRAME.registerComponent("sky-walking", {
 		minorityScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		starScale: { type: "vec3", default: { x: 2, y: 2, z: 2 } },
 		minorityColor: { type: "color", default: "#37428A" },
-		staticColor: { type: "color", default: "#EF2D5E" },
-		grandTotalRot: { type: "int", default: 0 },
-		countingRot: { type: "vec3", default: { x: 0, y: 0, z: 0 } },
+		majorColor: { type: "color", default: "#EF2D5E" },
 	},
 
 	init: function () {
-		this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
+		this.tick = AFRAME.utils.throttleTick(this.tick, 10, this); // Slow tick() to 10ms
 
 		let data = this.data;
 
 		const sceneEl = document.querySelector("a-scene");
-
 		this.minorityConts = [];
 		this.majorityConts = [];
-		this.oneScaler = 0;
 		this.scalerEls = [];
 		this.oldDiameter = undefined;
 		this.oldColor;
-		// this.countingRot = 0;
-		this.directionRot = false;
-
 		let randDur = Math.random() * 8600 + 6500;
-		this.injectRot = 180;
 
 		// ————————————————————————————————————o Trigger Audio Play -->
 		// Trigger Audio Play -->
 		//
-		// sceneEl.addEventListener("triggerdown", function (evt) {
-		// 	soundFile.play();
-		// 	console.log("Trigger Down");
-		// });
 		sceneEl.addEventListener("enter-vr", function () {
-			soundFile.play();
+			royksopp.play();
 		});
 
 		// ————————————————————————————————————o————————————————————————————————————o Low earth wOrbit -->
@@ -69,14 +57,6 @@ AFRAME.registerComponent("sky-walking", {
 				dur: randDur, // Random duration of orbit
 				loop: true,
 			});
-
-			// minorityHldr.object3D.rotation.set(
-			// 	THREE.Math.degToRad(0),
-			// 	THREE.Math.degToRad(0),
-			// 	THREE.Math.degToRad(0)
-			// );
-
-			// el.object3D.rotation.x += Math.PI;
 
 			// ————————————————————————————————————o Boxes -->
 			// Boxes - Create and assign spins -->
@@ -114,7 +94,6 @@ AFRAME.registerComponent("sky-walking", {
 		// ————————————————————————————————————o————————————————————————————————————o Majority Cubes —>
 		//
 		for (let j = 0; j < 200; j++) {
-			// let randDur = Math.random() * 8600 + 6500;	// Using randDur defined above to keep rotations of all stars in sync
 
 			// ————————————————————————————————————o Need majorHldr to enable orbting -->
 			// Need majorHldr to enable orbting animation -->
@@ -124,7 +103,6 @@ AFRAME.registerComponent("sky-walking", {
 			majorHldr.setAttribute("id", "majorHldr-" + j);
 			majorHldr.setAttribute("animation", {
 				property: "rotation",
-				// to: "0 0 0", // Orbit around Y axis
 				to: { x: 0, y: newRotY, z: 0 }, // Orbit around Y axis
 				easing: "linear",
 				dur: this.data.randDur, // Random duration of orbit
@@ -135,40 +113,38 @@ AFRAME.registerComponent("sky-walking", {
 			let starY = Math.floor(Math.random() * (30 + 60) - 40);
 			let starZ = Math.floor(Math.random() * (30 + 60) - 40);
 
-			let oneStatic = this.oneStatic;
-			oneStatic = document.createElement("a-box");
-			oneStatic.setAttribute("id", "oneStatic-" + j);
-			oneStatic.setAttribute("scale", this.data.starScale);
-			// this.oneStatic.setAttribute("scale", {x: 8, y: 8, z: 8});
-			oneStatic.setAttribute("material", { color: data.staticColor });
-			oneStatic.setAttribute("position", {
+			let oneMajor = this.oneMajor;
+			oneMajor = document.createElement("a-box");
+			oneMajor.setAttribute("id", "oneMajor-" + j);
+			oneMajor.setAttribute("scale", this.data.starScale);
+			oneMajor.setAttribute("material", { color: data.majorColor });
+			oneMajor.setAttribute("position", {
 				x: starX,
 				y: starY,
 				z: starZ,
 			});
-			// oneStatic.setAttribute("animation", {
-			// 	property: "rotation",
-			// 	from: "180 180 180",
-			// 	to: "360 360 360",
-			// 	easing: "linear",
-			// 	dur: randDur,
-			// 	loop: true,
-			// });
 
-			oneStatic.object3D.rotation.set(
-				THREE.Math.degToRad(0),
-				THREE.Math.degToRad(360),
-				THREE.Math.degToRad(0)
-			);
 
-			oneStatic.eventHandlerFn = function () {
+			// ————————————————————————————————————o Pivoting Majority Cubes -->
+			// Pivoting Majority Cubes -->
+			//
+			oneMajor.setAttribute("animation", {
+				property: "rotation",
+				from: "180 180 180",
+				to: "360 360 360",
+				easing: "linear",
+				dur: randDur,
+				loop: true,
+			});
+
+			oneMajor.eventHandlerFn = function () {
 				console.log(self.data.tmpColor);
 			};
 
 			this.majorityConts.push(majorHldr);
-			this.scalerEls.push(oneStatic);
+			this.scalerEls.push(oneMajor);
 			sceneEl.appendChild(majorHldr);
-			majorHldr.appendChild(oneStatic);
+			majorHldr.appendChild(oneMajor);
 		}
 	},
 
@@ -204,39 +180,22 @@ AFRAME.registerComponent("sky-walking", {
 		}
 	},
 
-	// // ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
-	// // Triggered in tick() below -->
-	// //
-	// setNewRot: function (changeRot) {
-	// 	let changingRot = this.data.countingRot.y;
-	// 	// console.log('changingRot: ' + changingRot)
-
-	// 	// ——————————————————o Set Direction of Orbit -->
-	// 	if (directionRot) {
-	// 		changingRot = 0;
-	// 	} else {
-	// 		changingRot = 360;
-	// 	}
-
-	// 	for (let i = 0; i < this.majorityConts.length; i++) {
-	// 		this.majorityConts[i].setAttribute("animation", {
-	// 			property: "rotation",
-	// 			// to: "0 360 0",
-	// 			to: {
-	// 				x: this.data.countingRot.x,
-	// 				y: changingRot,
-	// 				z: this.data.countingRot.z,
-	// 			},
-	// 			easing: "linear",
-	// 			dur: 12000,
-	// 			loop: true,
-	// 		});
-	// 	}
-	// },
-
 	tick: function (time, deltaTime) {
-		for (let i = 0; i < this.majorityConts.length; i++) {
-			this.majorityConts[i].object3D.rotation.y += 0.01;
+
+		// ————————————————————————————————————o Rotate the Muthas -->
+		// Rotate the Muthas -->
+		//
+		if (directionRot == 0) {
+			// You Can't Rotate Bruce
+
+		} else if (directionRot == 1) {
+			for (let i = 0; i < this.majorityConts.length; i++) {
+				this.majorityConts[i].object3D.rotation.y += 0.006;
+			}
+		} else {
+			for (let i = 0; i < this.majorityConts.length; i++) {
+				this.majorityConts[i].object3D.rotation.y -= 0.006;
+			}
 		}
 
 		// ————————————————————————————————————o Animating scale -->
@@ -254,11 +213,6 @@ AFRAME.registerComponent("sky-walking", {
 			this.setColor(theColor);
 			this.oldColor = theColor;
 		}
-
-		// ————————————————————————————————————o Send "static cubes" into Orbit on Cues -->
-		// setNewRot() above -->
-		//
-		// this.setNewRot();
 	},
 });
 
@@ -276,16 +230,16 @@ function loadScene() {
 			$(".enter").animate({ opacity: "1" }, 500);
 		});
 
-		// Fade out Splash Page
+		// Enter Cubeville
 		//
 		let fadeMsg = document.getElementById("splashPg");
-		fadeMsg.onclick = () => {
+		$('.enter').click(function() {
 			fadeMsg.classList.add("fadeOut");
 			document.body.classList.add("unfade");
 			setTimeout(function () {
 				fadeMsg.style.display = "none";
 			}, 1000);
-		};
+		})
 	} else {
 		setTimeout(loadScene, 90);
 	}
