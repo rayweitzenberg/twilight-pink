@@ -30,6 +30,11 @@ AFRAME.registerComponent("sky-walking", {
 		this.oldDiameter = undefined;
 		this.oldColor;
 		let randDur = Math.random() * 8600 + 6500;
+		this.randSpeed = []	// Random Speeds for Majority Orbiters
+		for (let spd = 0; spd < 4; spd++) {
+			this.randSpeed.push(Math.random() * (0.0026 - 0.0094) + 0.0094)
+			console.log('this.randSpeed: ' + this.randSpeed)
+		}
 
 		// ————————————————————————————————————o Trigger Audio Play -->
 		// Trigger Audio Play -->
@@ -182,14 +187,33 @@ AFRAME.registerComponent("sky-walking", {
 
 	tick: function (time, deltaTime) {
 
-		// ————————————————————————————————————o Rotate the Muthas -->
-		// Rotate the Muthas -->
+		// ————————————————————————————————————o Rotate Majority -->
+		// Rotate Majority -->
 		//
 		if (directionRot == 0) {
 			// You Can't Rotate Bruce
 
 		} else if (directionRot == 1) {
 			for (let i = 0; i < this.majorityConts.length; i++) {
+				this.majorityConts[i].object3D.rotation.y += 0.006;
+			}
+
+		// ————————————————————————————————————o Multiple Orbit Speeds -->
+		// Set Multiple Majority Orbit Speeds -->
+		//
+		} else if (directionRot == 2) {
+			for (let i = 0; i < this.randSpeed.length; i++) {
+				for (let j = 0; j < this.majorityConts.length; j++) {
+					if (j < 49) {
+						this.majorityConts[j].object3D.rotation.y += this.randSpeed[0]
+					} else if (j >= 50 && j < 99) {
+						this.majorityConts[j].object3D.rotation.y += this.randSpeed[1]
+					} else if (j >= 100 && j < 150) {
+						this.majorityConts[j].object3D.rotation.y += this.randSpeed[2] * -1
+					} else if (j >= 150 && j < 200) {
+						this.majorityConts[j].object3D.rotation.y += this.randSpeed[3]
+					}
+				}
 				this.majorityConts[i].object3D.rotation.y += 0.006;
 			}
 		} else {

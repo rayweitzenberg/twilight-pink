@@ -40,6 +40,7 @@ function setup() {
 	};
 
 	// masterVolume(0.02)
+	// royksopp.play();
 
 	royksopp.onended(function() {
 		directionRot = 0
@@ -82,7 +83,7 @@ cuedUp = (val) => {
 			break;
 		case "cue02":
 			theColor = "tomato";
-			console.log("cue01: deepskyblue");
+			console.log("cue02: tomato");
 			break;
 		case "cue03":
 			theColor = "#EF2D5E";
@@ -91,27 +92,23 @@ cuedUp = (val) => {
 		case "cue03b":
 			theColor = "tomato";
 			directionRot = 1; // ——————————————————o Rotation -->
-			console.log("directionRot: " + directionRot);
-			console.log("cue03b: tomato");
+			console.log("cue03b: tomato + directionRot: " + directionRot);
 			break;
 		case "cue04":
 			theColor = "deepskyblue";
 			directionRot = 0; // ——————————————————o Rotation -->
-			console.log("directionRot: " + directionRot);
-			console.log("cue04: deepskyblue");
+			console.log("cue04: deepskyblue + directionRot: " + directionRot);
 			break;
 		case "cue05":
 			theColor = "tomato";
-			directionRot = 1; // ——————————————————o Rotation -->
-			console.log("directionRot: " + directionRot);
-			console.log("cue05: tomato");
+			directionRot = 2; // ——————————————————o Rotation -->
+			console.log("cue05: tomato + directionRot: " + directionRot);
 			break;
 		case "cue06":
 			theColor = "#EF2D5E";
-			directionRot = 1; // ——————————————————o Rotation -->
-			console.log("directionRot: " + directionRot);
+			directionRot = 2; // ——————————————————o Rotation -->
 			newDurat = Math.random() * 11600 + 8500;
-			console.log("cue06: #EF2D5");
+			console.log("cue06: #EF2D5E + directionRot: " + directionRot);
 			break;
 
 		// ————————————————————————————————————o testing cue points -->
@@ -119,7 +116,7 @@ cuedUp = (val) => {
 		//
 		case "tempCue01":
 			theColor = "deepskyblue";
-			directionRot = 1; // ——————————————————o Rotation -->
+			directionRot = 2; // ——————————————————o Rotation -->
 			console.log("directionRot: " + directionRot);
 			break;
 		case "tempCue02":
