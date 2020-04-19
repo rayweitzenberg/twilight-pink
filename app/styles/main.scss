@@ -63,13 +63,14 @@ a-scene {
 
 	.splashInner {
 		display: flex;
+		display: none;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
 		position: relative;
 		width: 100%;
 		max-width: 600px;
-    // border: 1px solid deepskyblue;
+		// border: 1px solid deepskyblue;
 	}
 
 	@media (min-width: 1025px) {
@@ -99,16 +100,16 @@ a-scene {
 	}
 
 	button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: static;
 		bottom: 0;
 		width: 150px;
 		height: 42px;
 		margin: 25px auto 0;
-    font-size: 16px;
-    padding-bottom: 3px;
+		font-size: 16px;
+		padding-bottom: 3px;
 		color: white;
 		letter-spacing: 1.5px;
 		font-weight: 300;
@@ -119,9 +120,10 @@ a-scene {
 		transition: opacity 1s;
 
 		&.enter {
-      position: absolute;
+			position: absolute;
 			opacity: 0;
 			border: 1px solid white;
+			outline: none;
 		}
 
 		&:hover {
@@ -150,6 +152,17 @@ a-scene {
 	}
 	100% {
 		opacity: 1;
+	}
+}
+
+#splashPg .reloaded {
+	display: none;
+	position: relative;
+	button {
+		margin: 0;
+		&.enter {
+			position: absolute;
+		}
 	}
 }
 

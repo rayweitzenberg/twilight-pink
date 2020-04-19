@@ -12,7 +12,7 @@ var volume;
 var diameter;
 let theColor = "#EF2D5E";
 let newRotY = 0;
-let directionRot = 0
+let directionRot = 0;
 let newDurat = 0;
 
 function preload() {
@@ -42,10 +42,21 @@ function setup() {
 	// masterVolume(0.02)
 	// royksopp.play();
 
-	royksopp.onended(function() {
-		directionRot = 0
+	// ————————————————————————————————————o Reload Scene at End -->
+	// Reload Scene at the End of the Track -->
+	//
+	royksopp.onended(function () {
+		let reload = window.location.href;
+		if (reload.indexOf("?") > -1) {
+			reload += "&reloaded";
+		} else {
+			reload += "?reloaded";
+		}
+		// window.location.href = reload;
+
+		directionRot = 0;
 		button.html("PLAY");
-	})
+	});
 
 	let button;
 	button = createButton("PLAY");
