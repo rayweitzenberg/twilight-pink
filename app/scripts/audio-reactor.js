@@ -17,7 +17,7 @@ let newDurat = 0;
 
 function preload() {
 	royksopp = loadSound(
-		"https://cdn.glitch.com/f5e18228-4ad6-44e5-8691-28fc5f4b1dc6%2Froyksopp.mp3?v=1586317404647"
+		"//neoneon.one/sky-walking/images/royksopp.mp3"
 	);
 }
 
